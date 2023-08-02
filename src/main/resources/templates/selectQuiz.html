@@ -1,69 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Registration</title>
-    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
-<nav>
-    <a th:href="@{/index.html}" class="button">Home</a>
-    <a href="#" class="button">About</a>
-    <a href="#" class="button">Contact</a>
-    <a th:href="@{/index.html}" class="button" >Logout</a>
-</nav>
-<div class="container">
-    <img th:src="@{/choice.png}" alt="image Logo" height="100px" class="image logo"/>
-    <h1>Select Quiz</h1>
-    <div th:each="quiz : ${quizzes}">
-        <div >
-            <form th:action="@{'/admin/getQuestions/' + ${quiz}}" method="get">
-                <button style="width: 50%; height: 100%; margin-bottom: 20px" type="submit" class="button">
-                    <th:block th:utext="${quiz}"></th:block>
-                </button>
-            </form>
+<section>
+    <div class="container">
+        <img th:src="@{/choice.png}" alt="image Logo" height="100px" class="image logo"/>
+        <h1>Select Quiz</h1>
+        <div th:each="quiz : ${quizzes}">
+            <div >
+                <form th:action="@{'/user/getQuestions/' + ${quiz}}" method="POST">
+                    <input type="hidden" th:value="${userName}" th:name="userName">
+                    <input type="hidden" th:value="${token}" th:name="token">
+                    <button style="width: 50%; height: 100%; margin-bottom: 20px" type="submit" class="button">
+                        <th:block th:utext="${quiz}"></th:block>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</section>
 </body>
 </html>
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Account Registration</title>-->
-<!--    <link rel="stylesheet" th:href="@{/styles.css}">-->
-<!--&lt;!&ndash;    <style>&ndash;&gt;-->
-<!--&lt;!&ndash;        .container {&ndash;&gt;-->
-<!--&lt;!&ndash;            border: 2px solid #ccc;&ndash;&gt;-->
-<!--&lt;!&ndash;            padding: 20px;&ndash;&gt;-->
-<!--&lt;!&ndash;            background-color: #f7f7f7;&ndash;&gt;-->
-<!--&lt;!&ndash;            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);&ndash;&gt;-->
-<!--&lt;!&ndash;            border-radius: 10px;&ndash;&gt;-->
-<!--&lt;!&ndash;        }&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-<!--</head>-->
-<!--<body>-->
-<!--<nav>-->
-<!--    &lt;!&ndash; Your navigation buttons here &ndash;&gt;-->
-<!--</nav>-->
-<!--<div class="container">-->
-<!--    <img th:src="@{/choice.png}" alt="image Logo" height="100px" class="image logo"/>-->
-<!--    <h1>Select Quiz</h1>-->
-<!--    <div th:each="quiz : ${quizzes}">-->
-<!--        <div style="width: 50%; height: 100%; margin-bottom: 20px;">-->
-<!--            <form th:action="@{'/admin/getQuestions/' + ${quiz}}" method="get">-->
-<!--                <button type="submit" class="button" style="width: 100%; height: 100%;">-->
-<!--                    <th:block th:utext="${quiz}"></th:block>-->
-<!--                </button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
 
 

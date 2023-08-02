@@ -1,23 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <!-- Link to the shared styles.css -->
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<nav>
-    <a href="index.html" class="button">Home</a>
-    <a href="#" class="button">About</a>
-    <a href="https://www.linkedin.com/in/shirish-jaiswal" class="button">Contact</a>
-    <a href="signup.html" class="button">Sign Up</a>
-</nav>
+<section>
 <div class="container">
-    <img src="login.png" alt="Signup Logo" height="100px" class="logo"/>
+    <img th:src="@{/login.png}" alt="login Logo" height="100px" class="logo"/>
     <h1>Login</h1>
-    <form action="/user/login" method="POST" class="form">
+    <form action="/authenticate" method="POST" class="form">
         <input type="text" id="userName" placeholder="Username" name="userName" required>
         <input type="password" id="password" placeholder="Password" name="password" required>
 
@@ -26,6 +19,7 @@
         </div>
     </form>
 </div>
+</section>
 </body>
 </html>
 

@@ -1,18 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QuizzyTron</title>
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<nav>
-  <a href="#" class="button">About</a>
-  <a href="https://www.linkedin.com/in/shirish-jaiswal" class="button">Contact</a>
-  <a href="login.html" class="button">Sign In</a>
-  <a href="signup.html" class="button">Sign Up</a>
-</nav>
+<section>
 <main>
   <h1>Welcome to QuizzyTron</h1>
   <h2>Test Your Knowledge with Fun Quizzes!</h2>
@@ -26,5 +20,6 @@
   </ol>
   <p>Ready to embark on an intellectual journey? Sign up now and let the quizzing begin!</p>
 </main>
+</section>
 </body>
 </html>

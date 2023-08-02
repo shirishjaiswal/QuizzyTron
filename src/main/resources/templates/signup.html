@@ -1,24 +1,15 @@
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Page</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<nav>
-    <a href="index.html" class="button">Home</a>
-    <a href="#" class="button">About</a>
-    <a href="https://www.linkedin.com/in/shirish-jaiswal" class="button">Contact</a>
-    <a href="login.html" class="button">Sign In</a>
-</nav>
-
-<form action="/user/signup" method="POST" class="form">
+<section>
+<form action="/signup" method="POST" class="form">
     <div class="container">
-        <img src="signup.png" alt="Signup Logo" height="100px" class="logo"/>
+        <img th:src="@{/signup.png}" alt="Signup Logo" height="100px" class="logo"/>
         <h1>Join Us Today!</h1>
 
         <div class="signup-field">
@@ -46,6 +37,7 @@
         </div>
     </div>
 </form>
+</section>
 <script src="signup.js"></script>
 </body>
 </html>

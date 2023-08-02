@@ -1,99 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
-    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
-<style>
-input[type="radio"] {
-    display: none;
-}
-
-h1 {
-  color: #238773;
-  text-align: center;
-  background-color: #ffff;
-  border-radius: 10px;
-  width : 300px;
-}
-span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: solid 0.5px #006865;
-    color: #238773;
-    text-align: center;
-    border-radius: 5px;
-    width: 400px;
-    width: 75%;
-    height: 30px;
-    margin-left: 20px;
-}
-
-span:hover {
-    color: #ffff
-    background-color: #238773;
-    transform: translateY(-4px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-input[type="radio"]:checked + span {
-    background-color: #9CCEC4;
-}
-.que-container {
-  margin: 10px auto;
-  max-width: 800px;
-  padding: 5px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-}
-li {
-    padding-left:20px;
-}
-</style>
 <body>
-<nav>
-    <a th:href="@{/index.html}" class="button">Home</a>
-    <h1 th:text="${quizName}">Quiz</h1>
-    <a th:href="@{https://www.linkedin.com/in/shirish-jaiswal/}" class="button">Contact</a>
-</nav>
-<div class="container">
-</br>
-    <form action="/admin/verify" method="post">
-        <input type="hidden" id="quizName" th:value="${quizName}" name="quizName"/>
-        <ol style="list-style-position: inside;">
-            <div th:each="question : ${questionsList}" class="que-container" style="text-align: left;">
-                <li>
-                    <b style="text-size:24" th:text="${question.question}"></b>
-                    <div class="answer-container">
-                        </br>
-                        <label>
-                            <input type="radio" th:name="${question.id}" th:value="${question.optOne}" required/>
-                            <span th:text="${question.optOne}"></span>
-                        </label><br/>
-                        <label>
-                            <input type="radio" th:name="${question.id}" th:value="${question.optTwo}" required/>
-                            <span th:text="${question.optTwo}"></span>
-                        </label><br/>
-                        <label>
-                            <input type="radio" th:name="${question.id}" th:value="${question.optThree}" required/>
-                            <span th:text="${question.optThree}"></span>
-                        </label><br/>
-                        <label>
-                            <input type="radio" th:name="${question.id}" th:value="${question.optFour}" required/>
-                            <span th:text="${question.optFour}"></span>
-                        </label><br/>
-                    </div>
-                </li>
-            </div>
-        </ol>
-        <button type="submit" class="button" id="submitButton">Submit</button>
-    </form>
-</div>
+<section>
+    <div class="container">
+        <h1 th:text="${quizName}">Quiz</h1>
+        </br>
+        <form action="/user/verify" method="post">
+            <input type="hidden" id="userName" th:value="${userName}" th:name="userName">
+            <input type="hidden" id="token" th:value="${token}" th:name="token">
+            <input type="hidden" id="quizName" th:value="${quizName}" name="quizName"/>
+            <ol style="list-style-position: inside;">
+                <div th:each="question : ${questionsList}" class="que-container" style="text-align: left;">
+                    <li>
+                        <b style="text-size:24" th:text="${question.question}"></b>
+                        <div class="answer-container">
+                            </br>
+                            <label>
+                                <input type="radio" th:name="${question.id}" th:value="${question.optOne}" required/>
+                                <span th:text="${question.optOne}"></span>
+                            </label><br/>
+                            <label>
+                                <input type="radio" th:name="${question.id}" th:value="${question.optTwo}" required/>
+                                <span th:text="${question.optTwo}"></span>
+                            </label><br/>
+                            <label>
+                                <input type="radio" th:name="${question.id}" th:value="${question.optThree}" required/>
+                                <span th:text="${question.optThree}"></span>
+                            </label><br/>
+                            <label>
+                                <input type="radio" th:name="${question.id}" th:value="${question.optFour}" required/>
+                                <span th:text="${question.optFour}"></span>
+                            </label><br/>
+                        </div>
+                    </li>
+                </div>
+            </ol>
+            <button type="submit" class="button" id="submitButton">Submit</button>
+        </form>
+    </div>
+</section>
 </body>
 </html>

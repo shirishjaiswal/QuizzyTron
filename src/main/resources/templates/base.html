@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content)">
+<head>
+    <meta charset="UTF-8">
+    <title th:replace="${title}">title</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<nav>
+    <a href="/" class="button">Home</a>
+    <a href="about" class="button">About</a>
+    <a href="https://www.linkedin.com/in/shirish-jaiswal" class="button">Contact</a>
+    <a href="login" class="button">Sign In</a>
+    <a href="signup" class="button">Sign Up</a>
+    <form th:action="@{/logout(userName=${userName}, token=${token})}" method="POST">
+        <button type="submit" class="button">Log Out</button>
+    </form>
+</nav>
+<div th:replace="${content}"></div>
+</body>
+</html>

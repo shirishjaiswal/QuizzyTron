@@ -1,74 +1,97 @@
 package com.exam.controller;
 
+import com.exam.module.Questions;
 import com.exam.module.User;
-import com.exam.service.JwtService;
+import com.exam.service.QuestionService;
 import com.exam.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+import java.util.HashMap;
+import java.util.List;
+
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
-    private JwtService jwtService;
+    QuestionService questionService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    @PostMapping("/")
+    public String home (@RequestParam("token")  String token,
+                        @RequestParam("userName") String userName, HttpServletRequest request) {
+        userService.isValidRequest(token, userName);
 
-    @PostMapping("/signup")
-    public ModelAndView makeUser (@ModelAttribute User user) {
+        request.setAttribute("token", token);
+        request.setAttribute("userName", userName);
+        return "main";
+    }
 
-        User saved = userService.createUser(user);
-
-        ModelAndView modelAndView = new ModelAndView("/signUpResponse.html");
-
-        String noteThree = "If you have any questions or need assistance, please don't hesitate to contact our support team.";
-        String noteFour = "Thank you";
-
-        modelAndView.addObject("noteThree", noteThree);
-        modelAndView.addObject("noteFour", noteFour);
-
-        if(saved == null) {
-            String noteOne = "Registration Unsuccessfull Please try again!!";
-            String noteTwo = "If already have an account Please log in using your email address and password to access all the features of our website.";
-            modelAndView.addObject("textColor", "red");
-            modelAndView.addObject("noteOne", noteOne);
-            modelAndView.addObject("noteTwo", noteTwo);
-        }
-        else {
-            String noteOne = "Congratulations! Your account has been successfully registered.";
-            String noteTwo = "If already have an account Please log in using your email address and password to access all the features of our website.";
-
-            modelAndView.addObject("imageURL", "/checked.png");
-            modelAndView.addObject("noteOne", noteOne);
-            modelAndView.addObject("noteTwo", noteTwo);
-        }
+    @PostMapping("/quizz")
+    public ModelAndView getQuizzes(@RequestParam("token")  String token,
+                                   @RequestParam("userName") String userName) {
+        userService.isValidRequest(token, userName);
+        List<String> quizzes = questionService.getQuizList();
+        ModelAndView modelAndView = new ModelAndView("/selectQuiz.html");
+        modelAndView.addObject("userName", userName);
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("quizzes", quizzes);
         return modelAndView;
     }
 
-    @PostMapping("/login")
-    public ModelAndView login (@RequestParam ("userName") String userName,
-                                @RequestParam ("password") String password) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, password));
-        String token = null;
-        ModelAndView modelAndView = new ModelAndView("/loginHome.html");
-        if (authentication.isAuthenticated()) {
-            token = jwtService.generateToken(userName);
-            modelAndView.addObject("userName", userName);
-            return modelAndView;
-        } else {
-            throw new UsernameNotFoundException("invalid user request !");
+    @PostMapping("/getQuestions/{quizName}")
+    public ModelAndView getQuiz (@PathVariable("quizName") String quizName,
+                                 @RequestParam("token") String token,
+                                 @RequestParam("userName") String userName){
+        userService.isValidRequest(token, userName);
+        List<Questions> questionsList = questionService.getQuiz(quizName);
+
+        ModelAndView modelAndView = new ModelAndView("/quizPage.html");
+        modelAndView.addObject("userName", userName);
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("quizName", questionsList.get(0).getQuizName());
+        modelAndView.addObject("questionsList", questionsList);
+        return modelAndView;
+    }
+
+    @PostMapping("/verify")
+    public ModelAndView verifyAnswers(@RequestParam HashMap<String, String> answer) {
+        userService.isValidRequest(answer.get("token"), answer.get("userName"));
+        int marks = questionService.verifyAnswer(answer);
+        int noOfQuestion = questionService.noOfQuestion(answer.get("quizName"));
+
+        ModelAndView modelAndView = new ModelAndView("/marks.html");
+        String greeting = "";
+        String note = "";
+        if(noOfQuestion/2 >= marks) {
+            modelAndView.addObject("imageURL", "/failed.png");
+            modelAndView.addObject("textColor", "red");
+            greeting = "Not Up to the Mark";
+            note = "Prepare More";
         }
+        else {
+            modelAndView.addObject("imageURL", "/pass.png");
+            greeting = "Congratulations!!!";
+            note = "Keep it Up!!";
+        }
+        String vMark = marks + "/" + noOfQuestion;
+        modelAndView.addObject("userName", answer.get("userName"));
+        modelAndView.addObject("token", answer.get("token"));
+        modelAndView.addObject("greetings", greeting);
+        modelAndView.addObject("marks", vMark);
+        modelAndView.addObject("note", note);
+        return modelAndView;
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about";
     }
 
     @GetMapping("/{userName}")
@@ -79,15 +102,5 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public String deleteUser(@PathVariable("userId") Long userId) {
         return userService.deleteUserById(userId);
-    }
-
-    @ExceptionHandler
-    public ModelAndView exceptionHandler (Exception ex) {
-        ModelAndView modelAndView = new ModelAndView("error");
-
-        String message = ex.getMessage();
-        modelAndView.addObject("imageURL", "/cancel.png");
-        modelAndView.addObject("errorMessage", message);
-        return modelAndView;
     }
 }

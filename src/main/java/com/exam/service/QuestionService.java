@@ -30,7 +30,7 @@ public class QuestionService {
         Set<String> keySet = answer.keySet();
         int marks = 0;
         for (String key : keySet) {
-            if(!key.equals("quizName")) {
+            if(isDigit(key)) {
                 String answerOfQuestion = questionRepo.getAnswerOfQuestion(Integer.parseInt(key));
                 if (answerOfQuestion.equals(answer.get(key))) {
                     marks++;
@@ -39,7 +39,9 @@ public class QuestionService {
         }
         return marks;
     }
-
+    public static boolean isDigit(String key) {
+        return key.matches("\\d+");
+    }
     public List<String> getQuizList() {
         List<String> quizNames = questionRepo.getQuizNames();
         if(quizNames.isEmpty()){
