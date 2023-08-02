@@ -1,0 +1,51 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav>
+    <a href="index.html" class="button">Home</a>
+    <a href="#" class="button">About</a>
+    <a href="https://www.linkedin.com/in/shirish-jaiswal" class="button">Contact</a>
+    <a href="login.html" class="button">Sign In</a>
+</nav>
+
+<form action="/user/signup" method="POST" class="form">
+    <div class="container">
+        <img src="signup.png" alt="Signup Logo" height="100px" class="logo"/>
+        <h1>Join Us Today!</h1>
+
+        <div class="signup-field">
+            <input id="firstName" name="firstName" required placeholder="First Name" class="input"/>
+        </div>
+        <div class="signup-field">
+            <input id="lastName" name="lastName" required placeholder="Last Name" class="input"/>
+        </div>
+        <div class="signup-field">
+            <input id="mobileNumber" name="mobileNumber" required type="tel" placeholder="Mobile Number"
+                   class="input"/>
+        </div>
+        <div class="signup-field">
+            <input id="email" name="email" required type="email" placeholder="Email" class="input"/>
+        </div>
+        <div class="signup-field">
+            <input id="userName" name="userName" required placeholder="UserName" class="input"/>
+        </div>
+        <div class="signup-field">
+            <input id="password" name="password" required type="password" placeholder="Password" class="input"/>
+        </div>
+        <div class="button-row">
+            <button type="submit" class="button" id="submitButton">Sign Up</button>
+            <button type="reset" class="button">Clear</button>
+        </div>
+    </div>
+</form>
+<script src="signup.js"></script>
+</body>
+</html>

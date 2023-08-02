@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<input type="hidden" id="authToken" th:value="${authToken}"/>
+<nav>
+    <a th:href="@{/home/index.html}" class="button">Home</a>
+    <a href="#" class="button">About</a>
+    <a th:href="@{https://www.linkedin.com/in/shirish-jaiswal/}" class="button">Contact</a>
+    <a th:href="@{/login/login.html}" class="button">Login</a>
+</nav>
+<div class="container">
+    <img th:src="${imageURL}" alt="img" height="100px" class="img logo"/>
+    <h1 th:style="'color: ' + ${textColor}" id="noteOne" th:text="${noteOne}"></h1>
+    <h3 id="noteTwo" th:text="${noteTwo}"></h3>
+    <h3 id="noteThree" th:text="${noteThree}"></h3>
+    <h3 id="noteFour" th:text="${noteFour}"></h3>
+</div>
+<footer>
+    <p style="text-align: center;"> &copy; 2023 QuizzyTron. All rights reserved.</p>
+</footer>
+</body>
+
+</html>

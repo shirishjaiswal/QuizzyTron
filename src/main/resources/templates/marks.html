@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<nav>
+    <a th:href="@{/index.html}" class="button">Home</a>
+    <a href="#" class="button">About</a>
+    <a th:href="@{https://www.linkedin.com/in/shirish-jaiswal/}" class="button">Contact</a>
+    <a th:href="@{/index.html}" class="button" >Logout</a>
+</nav>
+<div class="container">
+    <img th:src="${imageURL}" alt="img" height="100px" class="img logo"/>
+    <h1 th:style="'color: ' + ${textColor}" id="greetings" th:text="${greetings}"></h1>
+    <h3>You achieved a score of:</h3>
+    <h1 id="marks" th:text="${marks}"></h1>
+    <h3 id="note" th:text="${note}"></h3>
+</div>
+</body>
+</html>
