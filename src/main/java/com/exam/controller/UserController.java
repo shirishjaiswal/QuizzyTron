@@ -101,7 +101,6 @@ public class UserController {
     public String profile (@PathVariable String userName, HttpServletRequest request) {
         String token = userService.isValidRequest(userName);
         List<Quiz> quizList = quizService.findByUserName(userName);
-        System.out.println(quizList);
         request.setAttribute("token", token);
         request.setAttribute("userName", userName);
         request.setAttribute("quizList", quizList);

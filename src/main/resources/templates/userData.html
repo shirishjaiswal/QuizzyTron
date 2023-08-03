@@ -16,6 +16,12 @@
         <h1 th:text="${userName}"></h1>
         <h2>Quiz Attended</h2>
         <div class="quizcont">
+            <div th:if="${quizList == null or quizList.size() == 0}">
+                </br>
+                <h3>No Quiz Attended</h3>
+                </br>
+                <b>!! Start Your Journey Now !!</b>
+            </div>
             <div th:each="quiz : ${quizList}" class="quiz-container">
                 <li>
                     <b th:text="${quiz.quizName}"></b>

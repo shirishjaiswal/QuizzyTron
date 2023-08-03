@@ -26,13 +26,9 @@ go to : http://localhost:8082
 
 ### Screenshots
 URL : ```http://localhost:8082/```
-![image](https://github.com/shirishjaiswal/QuizzyTron/assets/98471211/4b534632-0f6d-499b-9a20-bf6fe35e393f)
+![image](https://github.com/shirishjaiswal/QuizzyTron/assets/98471211/fad54106-fba1-4072-a0d3-303ed649da14)
+URL : ```http://localhost:8082/signup.html```
+![image](https://github.com/shirishjaiswal/QuizzyTron/assets/98471211/c36f6c86-3f41-49d4-84c3-f7b774657872)
 
-URL : ```http://localhost:8082/signup```
-![image](https://github.com/shirishjaiswal/QuizzyTron/assets/98471211/1e070d9e-94c3-4f0a-8342-38ddde728de4)
 
-URL : ```http://localhost:8082/login```
-![image](https://github.com/shirishjaiswal/QuizzyTron/assets/98471211/f20c08ee-9947-4858-b03a-8cb8dd2399d4)
-
-Other end points needs to be integrated with frontend
 ![image](https://github.com/shirishjaiswal/QuizzyTron/assets/98471211/8c3520d0-94e3-40bc-9663-d8d2283b1431)
