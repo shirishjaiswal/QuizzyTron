@@ -7,15 +7,24 @@
 </head>
 <body>
 <nav>
-    <a href="/" class="button">Home</a>
-    <a href="about" class="button">About</a>
-    <a href="https://www.linkedin.com/in/shirish-jaiswal" class="button">Contact</a>
-    <div class="dropdown">
-        <a th:href="@{/user/profile/{userName}(userName=${userName})}" class="button" th:text="${userName} ? ${userName} : 'User'">User</a>
+    <form th:if="${userName != null and token != null}" th:action="@{/user/}" method="POST">
+        <input type="hidden" id="userName" name="userName" th:value="${userName}" />
+        <input type="hidden" id="token" name="token" th:value="${token}" />
+        <button type="submit" class="button">Home</button>
+    </form>
+    <a th:if="${userName == null}" href="/" class="button">Home</a>
+    <div class="dropdown" th:if="${userName == null}" >
+        <a href="about" class="button">About</a>
         <div class="dropdown-menu">
-            <a href="login" class="button">Sign In</a>
-            <a href="signup" class="button">Sign Up</a>
-            <form th:action="@{/logout(userName=${userName}, token=${token})}" method="POST">
+            <a href="https://www.linkedin.com/in/shirish-jaiswal" class="button">Contact</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <a th:href="${userName != null} ? @{/user/profile/{userName}(userName=${userName})} : '/'" class="button" th:text="${userName} ?: 'User'">User</a>
+        <div class="dropdown-menu">
+            <a th:if="${userName == null}" href="login" class="button">Sign In</a>
+            <a th:if="${userName == null}" href="signup" class="button">Sign Up</a>
+            <form th:if="${userName != null and token != null}" th:action="@{/logout(userName=${userName}, token=${token})}" th:method="${userName != null and token != null} ? 'POST' : 'GET'">
                 <button type="submit" class="button">Log Out</button>
             </form>
         </div>
@@ -24,3 +33,4 @@
 <div th:replace="${content}"></div>
 </body>
 </html>
+

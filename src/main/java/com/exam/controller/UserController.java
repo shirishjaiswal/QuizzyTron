@@ -30,11 +30,13 @@ public class UserController {
     private QuizService quizService;
 
     @PostMapping("/")
-    public String home (@ModelAttribute UserNameToken userNameToken, HttpServletRequest request) {
-        userService.isValidRequest(userNameToken.getToken(), userNameToken.getUserName());
+    public String home(@RequestParam(value = "userName") String userName,
+                       @RequestParam(value = "token") String token,
+                       HttpServletRequest request){
+        userService.isValidRequest(token, userName);
 
-        request.setAttribute("token", userNameToken.getToken());
-        request.setAttribute("userName", userNameToken.getUserName());
+        request.setAttribute("token", token);
+        request.setAttribute("userName", userName);
         return "main";
     }
 
@@ -96,9 +98,17 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping("/profile")
+    public String profile (@ModelAttribute UserNameToken userNameToken) {
+        return "index";
+    }
+
     @GetMapping("/profile/{userName}")
     public String profile (@PathVariable String userName, HttpServletRequest request) {
         String token = userService.isValidRequest(userName);
+        if(token == null) {
+            throw new RuntimeException("Please Login First");
+        }
         List<Quiz> quizList = quizService.findByUserName(userName);
         request.setAttribute("token", token);
         request.setAttribute("userName", userName);
@@ -109,7 +119,8 @@ public class UserController {
 
     @GetMapping("/about")
     public String about() {
-        return "about";
+
+        return "redirect:/about";
     }
 
     @GetMapping("/{userName}")

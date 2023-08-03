@@ -42,6 +42,12 @@ public class HomeController {
 
     @PostMapping("/logout")
     public RedirectView logout(@ModelAttribute UserNameToken userNameToken) {
+        try {
+            userService.isValidRequest(userNameToken.getToken(), userNameToken.getUserName());
+        }
+        catch (Exception ex) {
+            throw new RuntimeException("Please Log In First");
+        }
         userService.isValidRequest(userNameToken.getToken(), userNameToken.getUserName());
         int logout = userService.logout(userNameToken.getToken(), userNameToken.getUserName());
         if(logout == 0) {

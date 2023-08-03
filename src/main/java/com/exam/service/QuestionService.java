@@ -37,8 +37,6 @@ public class QuestionService {
                 }
             }
         }
-
-
         return marks;
     }
     public static boolean isDigit(String key) {

@@ -134,11 +134,12 @@ public class UserService {
         if (byToken != null) {
             return tempToken;
         }
-        try {
-            throw new Exception("Bad Request");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return null;
+//        try {
+//            throw new Exception("Bad Request");
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
 
     }
 
