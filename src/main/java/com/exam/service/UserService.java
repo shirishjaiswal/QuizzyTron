@@ -114,11 +114,25 @@ public class UserService {
 
     public boolean isValidRequest(String token, String userName) {
         String tempToken = generateToken(userName);
-        if(tempToken.equals(token)) {
+        if (tempToken.equals(token)) {
             User byToken = userRepo.findByToken(token);
             if (byToken != null) {
                 return true;
             }
+        }
+        try {
+            throw new Exception("Bad Request");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public String isValidRequest(String userName) {
+        String tempToken = generateToken(userName);
+        User byToken = userRepo.findByToken(tempToken);
+        if (byToken != null) {
+            return tempToken;
         }
         try {
             throw new Exception("Bad Request");

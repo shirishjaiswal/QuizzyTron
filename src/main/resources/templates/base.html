@@ -10,11 +10,16 @@
     <a href="/" class="button">Home</a>
     <a href="about" class="button">About</a>
     <a href="https://www.linkedin.com/in/shirish-jaiswal" class="button">Contact</a>
-    <a href="login" class="button">Sign In</a>
-    <a href="signup" class="button">Sign Up</a>
-    <form th:action="@{/logout(userName=${userName}, token=${token})}" method="POST">
-        <button type="submit" class="button">Log Out</button>
-    </form>
+    <div class="dropdown">
+        <a th:href="@{/user/profile/{userName}(userName=${userName})}" class="button" th:text="${userName} ? ${userName} : 'User'">User</a>
+        <div class="dropdown-menu">
+            <a href="login" class="button">Sign In</a>
+            <a href="signup" class="button">Sign Up</a>
+            <form th:action="@{/logout(userName=${userName}, token=${token})}" method="POST">
+                <button type="submit" class="button">Log Out</button>
+            </form>
+        </div>
+    </div>
 </nav>
 <div th:replace="${content}"></div>
 </body>

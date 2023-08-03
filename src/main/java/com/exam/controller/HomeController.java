@@ -1,6 +1,7 @@
 package com.exam.controller;
 
 import com.exam.dto.LoginRequestDetails;
+import com.exam.dto.UserNameToken;
 import com.exam.module.User;
 import com.exam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class HomeController {
@@ -40,10 +41,9 @@ public class HomeController {
     }
 
     @PostMapping("/logout")
-    public String logout(@RequestParam("token")  String token,
-                         @RequestParam("userName") String userName) {
-        userService.isValidRequest(token, userName);
-        int logout = userService.logout(token, userName);
+    public RedirectView logout(@ModelAttribute UserNameToken userNameToken) {
+        userService.isValidRequest(userNameToken.getToken(), userNameToken.getUserName());
+        int logout = userService.logout(userNameToken.getToken(), userNameToken.getUserName());
         if(logout == 0) {
             try {
                 throw new Exception("Not Signed In");
@@ -51,7 +51,8 @@ public class HomeController {
                 throw new RuntimeException(e);
             }
         }
-        return "index";
+        RedirectView redirectView = new RedirectView("/");
+        return redirectView;
     }
 
     @GetMapping("/signup")

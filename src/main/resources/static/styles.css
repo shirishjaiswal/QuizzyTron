@@ -9,15 +9,91 @@ nav {
     justify-content: space-around;
 }
 
+nav a.button {
+    all: unset;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    color: #fff;
+    text-decoration: none;
+    background-color: #238773;
+    transition: background-color 0.3s ease;
+}
+
+nav a.button:hover {
+    background-color: #26957F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+nav .dropdown {
+   position: relative;
+   font-family: Arial, sans-serif;
+   font-size: 16px;
+   padding: 10px 20px;
+   border-radius: 3px;
+   color: #fff;
+   text-decoration: none;
+   background-color: #238773;
+   transition: background-color 0.3s ease;
+}
+
+nav .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #238773;
+    border-radius: 3px;
+}
+
+nav .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+nav .dropdown-menu a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+}
+
+nav .dropdown-menu a:hover {
+    background-color: #26957F;
+}
+
 nav a {
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 3px;
-  transition: background-color 0.3s ease;
+  all: unset;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    color: #fff;
+    text-decoration: none;
+    background-color: #238773;
+    transition: background-color 0.3s ease;
 }
 
 nav a:hover {
+  background-color: #26957F;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+nav .button {
+  all: unset;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 3px;
+  color: #fff;
+  text-decoration: none;
+  background-color: #238773;
+  transition: background-color 0.3s ease;
+}
+
+nav .button:hover {
   background-color: #26957F;
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -35,6 +111,7 @@ p {
   line-height: 1.5;
   margin-bottom: 20px;
 }
+
 button {
   font-size: 16px;
   background-color: rgb(255, 255, 255);
@@ -51,13 +128,6 @@ button:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-header {
-  text-align: center;
-  padding: 20px 0;
-  background-color: #4caf50;
-  color: #fff;
-}
-
 h1 {
   color: #4caf50;
   margin-top: 20px;
@@ -65,7 +135,7 @@ h1 {
   text-align: center;
 }
 
-main h2 {
+h2 {
     text-align: center;
     color: rgb(21, 70, 74);
     margin-bottom: 10px;
@@ -127,4 +197,65 @@ ol li {
   font-weight: bold;
   margin-bottom: 5px;
   color: #444;
+}
+
+.q-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile {
+    border-radius: 50%;
+}
+
+.quiz-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-container li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.quizDetails-container {
+    margin-top: 10px;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    margin-top: 90px;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+.quizcont {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.shadow-box {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quizDetails-container {
+    margin-top: 10px;
+}
+
+h1, h2, h3, label {
+    margin: 0;
+    padding: 0;
 }

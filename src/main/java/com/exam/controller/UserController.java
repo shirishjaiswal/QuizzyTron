@@ -1,8 +1,11 @@
 package com.exam.controller;
 
+import com.exam.dto.UserNameToken;
 import com.exam.module.Questions;
+import com.exam.module.Quiz;
 import com.exam.module.User;
 import com.exam.service.QuestionService;
+import com.exam.service.QuizService;
 import com.exam.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +25,9 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    QuestionService questionService;
+    private QuestionService questionService;
+    @Autowired
+    private QuizService quizService;
 
     @PostMapping("/")
     public String home (@RequestParam("token")  String token,
@@ -34,15 +40,17 @@ public class UserController {
     }
 
     @PostMapping("/quizz")
-    public ModelAndView getQuizzes(@RequestParam("token")  String token,
-                                   @RequestParam("userName") String userName) {
-        userService.isValidRequest(token, userName);
+    public String getQuizzes(@ModelAttribute UserNameToken userNameToken, HttpServletRequest request) {
+        userService.isValidRequest(userNameToken.getToken(), userNameToken.getUserName());
         List<String> quizzes = questionService.getQuizList();
         ModelAndView modelAndView = new ModelAndView("/selectQuiz.html");
-        modelAndView.addObject("userName", userName);
-        modelAndView.addObject("token", token);
+        modelAndView.addObject("userName", userNameToken.getUserName());
+        modelAndView.addObject("token", userNameToken.getToken());
         modelAndView.addObject("quizzes", quizzes);
-        return modelAndView;
+        request.setAttribute("userName", userNameToken.getUserName());
+        request.setAttribute("token", userNameToken.getToken());
+        request.setAttribute("quizzes", quizzes);
+        return "selectQuiz";
     }
 
     @PostMapping("/getQuestions/{quizName}")
@@ -65,7 +73,7 @@ public class UserController {
         userService.isValidRequest(answer.get("token"), answer.get("userName"));
         int marks = questionService.verifyAnswer(answer);
         int noOfQuestion = questionService.noOfQuestion(answer.get("quizName"));
-
+        quizService.userAttendedQuiz(userService.findUserByUserName(answer.get("userName")), answer.get("quizName"), marks);
         ModelAndView modelAndView = new ModelAndView("/marks.html");
         String greeting = "";
         String note = "";
@@ -87,6 +95,18 @@ public class UserController {
         modelAndView.addObject("marks", vMark);
         modelAndView.addObject("note", note);
         return modelAndView;
+    }
+
+    @GetMapping("/profile/{userName}")
+    public String profile (@PathVariable String userName, HttpServletRequest request) {
+        String token = userService.isValidRequest(userName);
+        List<Quiz> quizList = quizService.findByUserName(userName);
+        System.out.println(quizList);
+        request.setAttribute("token", token);
+        request.setAttribute("userName", userName);
+        request.setAttribute("quizList", quizList);
+
+        return "userData";
     }
 
     @GetMapping("/about")

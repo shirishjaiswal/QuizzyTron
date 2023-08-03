@@ -11,7 +11,8 @@ import java.util.*;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-
+//    accessable from Swagger for now:
+//    http://localhost:PORT_NUMBER/swagger-ui/index.html#/
     @Autowired
     private QuestionService questionService;
 
