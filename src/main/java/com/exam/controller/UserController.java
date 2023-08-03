@@ -30,12 +30,11 @@ public class UserController {
     private QuizService quizService;
 
     @PostMapping("/")
-    public String home (@RequestParam("token")  String token,
-                        @RequestParam("userName") String userName, HttpServletRequest request) {
-        userService.isValidRequest(token, userName);
+    public String home (@ModelAttribute UserNameToken userNameToken, HttpServletRequest request) {
+        userService.isValidRequest(userNameToken.getToken(), userNameToken.getUserName());
 
-        request.setAttribute("token", token);
-        request.setAttribute("userName", userName);
+        request.setAttribute("token", userNameToken.getToken());
+        request.setAttribute("userName", userNameToken.getUserName());
         return "main";
     }
 

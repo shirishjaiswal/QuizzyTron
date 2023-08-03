@@ -9,19 +9,7 @@ nav {
     justify-content: space-around;
 }
 
-nav a.button {
-    all: unset;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 3px;
-    color: #fff;
-    text-decoration: none;
-    background-color: #238773;
-    transition: background-color 0.3s ease;
-}
-
-nav a.button:hover {
+nav .button:hover {
     background-color: #26957F;
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -34,7 +22,6 @@ nav .dropdown {
    padding: 10px 20px;
    border-radius: 3px;
    color: #fff;
-   text-decoration: none;
    background-color: #238773;
    transition: background-color 0.3s ease;
 }
@@ -43,7 +30,7 @@ nav .dropdown-menu {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    width: 98px;
     background-color: #238773;
     border-radius: 3px;
 }
@@ -53,26 +40,11 @@ nav .dropdown:hover .dropdown-menu {
 }
 
 nav .dropdown-menu a {
+	text-align: center;
     color: #fff;
     text-decoration: none;
     display: block;
-    padding: 5px 10px;
-}
-
-nav .dropdown-menu a:hover {
-    background-color: #26957F;
-}
-
-nav a {
-  all: unset;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 3px;
-    color: #fff;
-    text-decoration: none;
-    background-color: #238773;
-    transition: background-color 0.3s ease;
+    padding: 10px 10px;
 }
 
 nav a:hover {
@@ -91,12 +63,6 @@ nav .button {
   text-decoration: none;
   background-color: #238773;
   transition: background-color 0.3s ease;
-}
-
-nav .button:hover {
-  background-color: #26957F;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 main {
@@ -212,7 +178,7 @@ ol li {
     border-radius: 50%;
 }
 
-.quiz-container {
+.g-container {
     margin-top: 20px;
     padding: 10px;
     background-color: #fff;
@@ -226,10 +192,6 @@ ol li {
     margin-bottom: 10px;
 }
 
-.quizDetails-container {
-    margin-top: 10px;
-}
-
 h1, h2, h3 {
     margin: 0;
     padding: 0;
@@ -241,7 +203,7 @@ h1, h2, h3 {
     background-color: #f0f0f0;
     border-radius: 5px;
 }
-.quizcont {
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 20px;
@@ -251,7 +213,7 @@ h1, h2, h3 {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.quizDetails-container {
+.details-container {
     margin-top: 10px;
 }
 

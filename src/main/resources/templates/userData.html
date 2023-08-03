@@ -13,19 +13,19 @@
     <input type="hidden" id="token" th:value="${token}" th:name="token">
     <div class="container">
         <img th:src="@{/profile.png}" alt="loggedIn Logo" height="100px" class="profile"/>
-        <h1 th:text="${userName}"></h1>
+        <h1 th:text="${#strings.toUpperCase(userName)}"></h1></br>
         <h2>Quiz Attended</h2>
-        <div class="quizcont">
+        <div class="grid">
             <div th:if="${quizList == null or quizList.size() == 0}">
                 </br>
                 <h3>No Quiz Attended</h3>
                 </br>
                 <b>!! Start Your Journey Now !!</b>
             </div>
-            <div th:each="quiz : ${quizList}" class="quiz-container">
+            <div th:each="quiz : ${quizList}" class="g-container">
                 <li>
                     <b th:text="${quiz.quizName}"></b>
-                    <div class="quizDetails-container">
+                    <div class="details-container">
                         <label>
                             Quiz Attended on :
                             <span th:text="${quiz.date}"></span>

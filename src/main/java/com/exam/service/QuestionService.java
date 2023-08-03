@@ -46,9 +46,6 @@ public class QuestionService {
     }
     public List<String> getQuizList() {
         List<String> quizNames = questionRepo.getQuizNames();
-        if(quizNames.isEmpty()){
-            throw new RuntimeException("No Quiz Available at this time");
-        }
         return quizNames;
     }
 
