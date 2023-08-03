@@ -25,12 +25,9 @@ spring.jpa.properties.hibernate.format_sql = true
 spring.main.allow-circular-references=true
 ```
 
-<<<<<<< HEAD
-Go to : http://localhost:8082
-
 ### Accessing the Project
 Home URL : ```http://localhost:8082/```
-=======
+
 ## Requirements
 1. IDE (Intellij Idea / Eclipse)
 2. Web Browser (Chrome / Brave)
@@ -58,8 +55,6 @@ Endpoints remained to integrate with FrontEnd
 Resources and libraries that have been instrumental in building QuizzyTron:
 - Spring Boot: https://spring.io/projects/spring-boot
 - Thymeleaf: https://www.thymeleaf.org/
->>>>>>> 4782a228deb43032a0a828207889b1d9fc8a0468
-
 
 GitHub: ```https://github.com/shirishjaiswal```
 LinkedIn: ```https://www.linkedin.com/in/shirish-jaiswal/```
