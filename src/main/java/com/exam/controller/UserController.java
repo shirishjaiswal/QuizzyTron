@@ -29,6 +29,11 @@ public class UserController {
     @Autowired
     private QuizService quizService;
 
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/";
+    }
+
     @PostMapping("/")
     public String home(@RequestParam(value = "userName") String userName,
                        @RequestParam(value = "token") String token,
@@ -119,7 +124,6 @@ public class UserController {
 
     @GetMapping("/about")
     public String about() {
-
         return "redirect:/about";
     }
 
