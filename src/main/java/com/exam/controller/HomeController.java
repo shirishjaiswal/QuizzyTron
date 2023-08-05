@@ -30,15 +30,15 @@ public class HomeController {
     }
 
     @PostMapping("/authenticate")
-    public ModelAndView login(@ModelAttribute LoginRequestDetails loginRequestDetails) {
+    public String login(@ModelAttribute LoginRequestDetails loginRequestDetails, HttpServletRequest request) {
 
         String token = userService.verify(loginRequestDetails);
 
-        ModelAndView modelAndView = new ModelAndView("/main.html");
+        ModelAndView modelAndView = new ModelAndView("/String.html");
 
-        modelAndView.addObject("userName", loginRequestDetails.getUserName());
-        modelAndView.addObject("token", token);
-        return modelAndView;
+        request.setAttribute("userName", loginRequestDetails.getUserName());
+        request.setAttribute("token", token);
+        return "main";
     }
 
     @PostMapping("/logout")
@@ -65,8 +65,6 @@ public class HomeController {
     public String makeUser(@ModelAttribute UserEntity userEntity, HttpServletRequest request) {
 
         UserEntity saved = userService.createUser(userEntity);
-
-        ModelAndView modelAndView = new ModelAndView("/signUpStatus.html");
 
         String noteThree = "If you have any questions or need assistance, please don't hesitate to contact our support team.";
         String noteFour = "Thank you";
