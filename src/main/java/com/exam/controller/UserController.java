@@ -56,46 +56,45 @@ public class UserController {
     }
 
     @PostMapping("/getQuestions/{quizName}")
-    public ModelAndView getQuiz (@PathVariable("quizName") String quizName,
-                                 @RequestParam("token") String token,
-                                 @RequestParam("userName") String userName){
+    public String getQuiz (@PathVariable("quizName") String quizName,
+                           @RequestParam("token") String token,
+                           @RequestParam("userName") String userName,
+                           HttpServletRequest request){
         userService.userRequestValidate(token, userName);
         List<Questions> questionsList = questionService.getQuiz(quizName);
-        ModelAndView modelAndView = new ModelAndView("/quizPage.html");
-        modelAndView.addObject("userName", userName);
-        modelAndView.addObject("token", token);
-        modelAndView.addObject("quizName", questionsList.get(0).getQuizName());
-        modelAndView.addObject("questionsList", questionsList);
-        return modelAndView;
+        request.setAttribute("userName", userName);
+        request.setAttribute("token", token);
+        request.setAttribute("quizName", questionsList.get(0).getQuizName());
+        request.setAttribute("questionsList", questionsList);
+        return "quizPage";
     }
 
     @PostMapping("/verify")
-    public ModelAndView verifyAnswers(@RequestParam HashMap<String, String> answer) {
+    public String verifyAnswers(@RequestParam HashMap<String, String> answer, HttpServletRequest request) {
         userService.userRequestValidate(answer.get("token"), answer.get("userName"));
         int marks = questionService.verifyAnswer(answer);
         int noOfQuestion = questionService.noOfQuestion(answer.get("quizName"));
         quizService.userAttendedQuiz(userService.findUserByUserName(answer.get("userName")), answer.get("quizName"), marks);
-        ModelAndView modelAndView = new ModelAndView("/marks.html");
         String greeting = "";
         String note = "";
         if(noOfQuestion/2 >= marks) {
-            modelAndView.addObject("imageURL", "/failed.png");
-            modelAndView.addObject("textColor", "red");
+            request.setAttribute("imageURL", "/failed.png");
+            request.setAttribute("textColor", "red");
             greeting = "Not Up to the Mark";
             note = "Prepare More";
         }
         else {
-            modelAndView.addObject("imageURL", "/pass.png");
+            request.setAttribute("imageURL", "/pass.png");
             greeting = "Congratulations!!!";
             note = "Keep it Up!!";
         }
         String vMark = marks + "/" + noOfQuestion;
-        modelAndView.addObject("userName", answer.get("userName"));
-        modelAndView.addObject("token", answer.get("token"));
-        modelAndView.addObject("greetings", greeting);
-        modelAndView.addObject("marks", vMark);
-        modelAndView.addObject("note", note);
-        return modelAndView;
+        request.setAttribute("userName", answer.get("userName"));
+        request.setAttribute("token", answer.get("token"));
+        request.setAttribute("greetings", greeting);
+        request.setAttribute("marks", vMark);
+        request.setAttribute("note", note);
+        return "marks";
     }
 
     @GetMapping("/profile")
