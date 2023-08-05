@@ -7,13 +7,13 @@
 </head>
 <body>
 <nav>
-    <form th:if="${userName != null and token != null}" th:action="@{/userEntity/}" method="POST">
+    <form th:if="${userName != null and token != null}" th:action="@{/user/}" method="POST">
         <input type="hidden" id="userName" name="userName" th:value="${userName}" />
         <input type="hidden" id="token" name="token" th:value="${token}" />
         <button type="submit" class="button">Home</button>
     </form>
     <a th:if="${userName == null}" href="/" class="button">Home</a>
-    <a th:if="${userName == null and token != null}" href="about" class="button">About</a>
+    <a th:if="${userName != null and token != null}" href="about" class="button">About</a>
     <div class="dropdown">
         <a th:href="${userName != null and token != null} ? @{/userEntity/profile(userName=${userName}, token=${token})} : '/'" class="button" th:text="${userName} ?: 'User'">User</a>
         <div class="dropdown-menu">
