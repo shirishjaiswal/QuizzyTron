@@ -2,7 +2,6 @@ package com.exam.service;
 
 import com.exam.dto.LoginRequestDetails;
 import com.exam.module.User;
-import com.exam.repository.IRoleRepo;
 import com.exam.repository.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
