@@ -3,7 +3,7 @@ COPY . /app
 WORKDIR /app
 RUN mvn clean package -DskipTests
 
-FROM openjdk-17.0.1-jdk-slim
+FROM openjdk:17-jdk-slim
 COPy --from=build /target/examserver-0.0.1-SNAPSHOT.jar demo.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/demo.jar"]
