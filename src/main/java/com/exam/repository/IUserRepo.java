@@ -18,6 +18,6 @@ public interface IUserRepo extends JpaRepository<UserEntity, Long> {
 
     @Modifying
     @Transactional
-    @Query(nativeQuery = true, value = "UPDATE user SET token = :token WHERE user_Name = :user_Name")
+    @Query(nativeQuery = true, value = "UPDATE user_Entity SET token = :token WHERE user_Name = :user_Name")
     public int addToken(@Param("token") String token, @Param("user_Name") String user_Name);
 }
