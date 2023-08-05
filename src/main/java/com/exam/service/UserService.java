@@ -20,9 +20,6 @@ public class UserService {
     @Autowired
     private IUserRepo userRepo;
 
-    @Autowired
-    private IRoleRepo roleRepo;
-
     //creating user
     public User createUser(User user) {
         Optional<User> isPresent = userRepo.findByUserName(user.getUserName());
