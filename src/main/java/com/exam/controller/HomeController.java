@@ -72,7 +72,7 @@ public class HomeController {
         String noteFour = "Thank you";
 
         request.setAttribute("noteThree", noteThree);
-        request.setAttribute(("noteFour", noteFour);
+        request.setAttribute("noteFour", noteFour);
 
         if (saved == null) {
             String noteOne = "Registration Unsuccessfull Please try again!!";
