@@ -4,6 +4,7 @@ import com.exam.dto.LoginRequestDetails;
 import com.exam.dto.UserNameToken;
 import com.exam.module.UserEntity;
 import com.exam.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,7 +62,7 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public ModelAndView makeUser(@ModelAttribute UserEntity userEntity) {
+    public String makeUser(@ModelAttribute UserEntity userEntity, HttpServletRequest request) {
 
         UserEntity saved = userService.createUser(userEntity);
 
@@ -70,24 +71,24 @@ public class HomeController {
         String noteThree = "If you have any questions or need assistance, please don't hesitate to contact our support team.";
         String noteFour = "Thank you";
 
-        modelAndView.addObject("noteThree", noteThree);
-        modelAndView.addObject("noteFour", noteFour);
+        request.setAttribute("noteThree", noteThree);
+        request.setAttribute(("noteFour", noteFour);
 
         if (saved == null) {
             String noteOne = "Registration Unsuccessfull Please try again!!";
             String noteTwo = "If already have an account Please log in using your email address and password to access all the features of our website.";
-            modelAndView.addObject("textColor", "red");
-            modelAndView.addObject("noteOne", noteOne);
-            modelAndView.addObject("noteTwo", noteTwo);
+            request.setAttribute("textColor", "red");
+            request.setAttribute("noteOne", noteOne);
+            request.setAttribute("noteTwo", noteTwo);
         } else {
             String noteOne = "Congratulations! Your account has been successfully registered.";
             String noteTwo = "If already have an account Please log in using your email address and password to access all the features of our website.";
 
-            modelAndView.addObject("imageURL", "/checked.png");
-            modelAndView.addObject("noteOne", noteOne);
-            modelAndView.addObject("noteTwo", noteTwo);
+            request.setAttribute("imageURL", "/checked.png");
+            request.setAttribute("noteOne", noteOne);
+            request.setAttribute("noteTwo", noteTwo);
         }
-        return modelAndView;
+        return "signUpStatus";
     }
 
     @GetMapping("/about")
