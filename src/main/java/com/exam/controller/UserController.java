@@ -57,13 +57,12 @@ public class UserController {
 
     @PostMapping("/getQuestions/{quizName}")
     public String getQuiz (@PathVariable("quizName") String quizName,
-                           @RequestParam("token") String token,
-                           @RequestParam("userName") String userName,
+                           @ModelAttribute UserNameToken userNameToken,
                            HttpServletRequest request){
-        userService.userRequestValidate(token, userName);
+        userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
         List<Questions> questionsList = questionService.getQuiz(quizName);
-        request.setAttribute("userName", userName);
-        request.setAttribute("token", token);
+        request.setAttribute("userName", userNameToken.getUserName());
+        request.setAttribute("token", userNameToken.getToken());
         request.setAttribute("quizName", questionsList.get(0).getQuizName());
         request.setAttribute("questionsList", questionsList);
         return "quizPage";
