@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface IQuizRepo extends JpaRepository<Quiz, Integer> {
-    List<Quiz> findAllByUserId(long id);
+    List<Quiz> findAllByUserEntityId(long id);
 }

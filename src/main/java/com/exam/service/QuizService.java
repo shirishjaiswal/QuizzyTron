@@ -29,7 +29,7 @@ public class QuizService {
 
     public List<Quiz> findByUserName(String userName) {
         UserEntity userByUserNameEntity = userService.findUserByUserName(userName);
-        List<Quiz> quizList = quizRepo.findAllByUserId(userByUserNameEntity.getId());
+        List<Quiz> quizList = quizRepo.findAllByUserEntityId(userByUserNameEntity.getId());
         return quizList;
     }
 }
