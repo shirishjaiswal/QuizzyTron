@@ -21,7 +21,7 @@
             </div>
             <div th:each="quiz : ${quizzes}" class="g-container"></br>
                 <div class="details-container">
-                    <form th:action="@{'/user/getQuestions/' + ${quiz}}" method="POST">
+                    <form th:action="@{'/userEntity/getQuestions/' + ${quiz}}" method="POST">
                         <input type="hidden" th:value="${userName}" th:name="userName">
                         <input type="hidden" th:value="${token}" th:name="token">
                         <button style="width: 50%; height: 100%; margin-bottom: 20px" type="submit" class="button">

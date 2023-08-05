@@ -1,6 +1,6 @@
 package com.exam.repository;
 
-import com.exam.module.User;
+import com.exam.module.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface IUserRepo extends JpaRepository<User, Long> {
-    Optional<User> findByUserName(String userName);
+public interface IUserRepo extends JpaRepository<UserEntity, Long> {
+    Optional<UserEntity> findByUserName(String userName);
 
-    User findByToken(String token);
+    UserEntity findByToken(String token);
 
     @Modifying
     @Transactional

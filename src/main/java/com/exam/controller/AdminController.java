@@ -2,14 +2,13 @@ package com.exam.controller;
 
 import com.exam.dto.UserNameToken;
 import com.exam.module.Questions;
-import com.exam.module.User;
+import com.exam.module.UserEntity;
 import com.exam.service.QuestionService;
 import com.exam.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
@@ -59,7 +58,7 @@ public class AdminController {
     }
 
     @GetMapping("/{userName}")
-    public User getUser(@PathVariable("userName") String userName) {
+    public UserEntity getUser(@PathVariable("userName") String userName) {
         return userService.findUserByUserName(userName);
     }
 

@@ -1,7 +1,7 @@
 package com.exam.service;
 
 import com.exam.module.Quiz;
-import com.exam.module.User;
+import com.exam.module.UserEntity;
 import com.exam.repository.IQuizRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,11 @@ public class QuizService {
     @Autowired
     private UserService userService;
 
-    public boolean userAttendedQuiz(User user, String quizName, int marks) {
+    public boolean userAttendedQuiz(UserEntity userEntity, String quizName, int marks) {
         Quiz quiz = new Quiz();
         quiz.setQuizName(quizName);
         quiz.setMarks(marks);
-        quiz.setUser(user);
+        quiz.setUserEntity(userEntity);
 
         Quiz save = quizRepo.save(quiz);
         if(save != null) return true;
@@ -28,8 +28,8 @@ public class QuizService {
     }
 
     public List<Quiz> findByUserName(String userName) {
-        User userByUserName = userService.findUserByUserName(userName);
-        List<Quiz> quizList = quizRepo.findAllByUserId(userByUserName.getId());
+        UserEntity userByUserNameEntity = userService.findUserByUserName(userName);
+        List<Quiz> quizList = quizRepo.findAllByUserId(userByUserNameEntity.getId());
         return quizList;
     }
 }

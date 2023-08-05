@@ -1,7 +1,7 @@
 package com.exam.service;
 
 import com.exam.dto.LoginRequestDetails;
-import com.exam.module.User;
+import com.exam.module.UserEntity;
 import com.exam.repository.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,15 +21,15 @@ public class UserService {
     private IUserRepo userRepo;
 
     //creating user
-    public User createUser(User user) {
-        Optional<User> isPresent = userRepo.findByUserName(user.getUserName());
+    public UserEntity createUser(UserEntity userEntity) {
+        Optional<UserEntity> isPresent = userRepo.findByUserName(userEntity.getUserName());
         if (!isPresent.isPresent()) {
-            user.setPassword(passwordEncoder(user.getPassword()));
-            if (user.getAdminPasscode().equals("OFFICIAL")) {
-                user.setRole("ADMIN");
-            } else user.setRole("USER");
-            userRepo.save(user);
-            return user;
+            userEntity.setPassword(passwordEncoder(userEntity.getPassword()));
+            if (userEntity.getAdminPasscode().equals("OFFICIAL")) {
+                userEntity.setRole("ADMIN");
+            } else userEntity.setRole("USER");
+            userRepo.save(userEntity);
+            return userEntity;
         }
         try {
             throw new Exception("UserName already Present Please try again !!!");
@@ -39,8 +39,8 @@ public class UserService {
     }
 
     //Find by UserName
-    public User findUserByUserName(String userName) {
-        Optional<User> isPresent = userRepo.findByUserName(userName);
+    public UserEntity findUserByUserName(String userName) {
+        Optional<UserEntity> isPresent = userRepo.findByUserName(userName);
         if (isPresent.isPresent()) {
             return isPresent.get();
         }
@@ -50,7 +50,7 @@ public class UserService {
     //Delete user by Id
     public String deleteUserById(Long userId) {
         this.userRepo.deleteById(userId);
-        Optional<User> byId = userRepo.findById(userId);
+        Optional<UserEntity> byId = userRepo.findById(userId);
         if (byId.isEmpty()) {
             return "UserDeleted";
         } else return "UserNotDeleted";
@@ -58,8 +58,8 @@ public class UserService {
 
     //login
     public String verify(LoginRequestDetails loginRequestDetails) {
-        User userByUserName = findUserByUserName(loginRequestDetails.getUserName());
-        if (userByUserName == null) {
+        UserEntity userByUserNameEntity = findUserByUserName(loginRequestDetails.getUserName());
+        if (userByUserNameEntity == null) {
             try {
                 throw new Exception("User is Not Present");
             } catch (Exception e) {
@@ -67,7 +67,7 @@ public class UserService {
             }
         }
         String encodedPassword = passwordEncoder(loginRequestDetails.getPassword());
-        boolean validPassword = encodedPassword.equals(userByUserName.getPassword());
+        boolean validPassword = encodedPassword.equals(userByUserNameEntity.getPassword());
         if (validPassword) {
             String token = generateToken(loginRequestDetails.getUserName());
             userRepo.addToken(token, loginRequestDetails.getUserName());
@@ -142,7 +142,7 @@ public class UserService {
         String tempToken = generateToken(userName);
         Map<String, Boolean> map = new HashMap<>();
         if (tempToken.equals(token)) {
-            User byToken = userRepo.findByToken(token);
+            UserEntity byToken = userRepo.findByToken(token);
             if (byToken != null) {
                 map.put(byToken.getRole(), true);
             }

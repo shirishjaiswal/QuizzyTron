@@ -20,5 +20,5 @@ public class Quiz {
     private final LocalDate date = LocalDate.now();
 
     @ManyToOne
-    private User user;
+    private UserEntity userEntity;
 }

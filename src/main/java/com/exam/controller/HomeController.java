@@ -2,7 +2,7 @@ package com.exam.controller;
 
 import com.exam.dto.LoginRequestDetails;
 import com.exam.dto.UserNameToken;
-import com.exam.module.User;
+import com.exam.module.UserEntity;
 import com.exam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,9 +61,9 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public ModelAndView makeUser(@ModelAttribute User user) {
+    public ModelAndView makeUser(@ModelAttribute UserEntity userEntity) {
 
-        User saved = userService.createUser(user);
+        UserEntity saved = userService.createUser(userEntity);
 
         ModelAndView modelAndView = new ModelAndView("/signUpStatus.html");
 
