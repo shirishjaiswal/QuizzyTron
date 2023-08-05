@@ -15,7 +15,7 @@
     <a th:if="${userName == null}" href="/" class="button">Home</a>
     <a th:if="${userName != null and token != null}" href="about" class="button">About</a>
     <div class="dropdown">
-        <a th:href="${userName != null and token != null} ? @{/userEntity/profile(userName=${userName}, token=${token})} : '/'" class="button" th:text="${userName} ?: 'User'">User</a>
+        <a th:href="${userName != null and token != null} ? @{/user/profile(userName=${userName}, token=${token})} : '/'" class="button" th:text="${userName} ?: 'User'">User</a>
         <div class="dropdown-menu">
             <form th:if="${userName != null and token != null}" th:action="@{/logout(userName=${userName}, token=${token})}" th:method="${userName != null and token != null} ? 'POST' : 'GET'">
                 <button type="submit" class="button">Log Out</button>
