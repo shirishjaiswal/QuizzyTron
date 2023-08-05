@@ -14,14 +14,33 @@
     <div class="container">
         <img th:src="@{/profile.png}" alt="loggedIn Logo" height="100px" class="profile"/>
         <h1 th:text="${#strings.toUpperCase(userName)}"></h1></br>
-        <h2>Quiz Attended</h2>
-        <div class="grid">
-            <div th:if="${quizList == null or quizList.size() == 0}">
-                </br>
-                <h3>No Quiz Attended</h3>
-                </br>
-                <b>!! Start Your Journey Now !!</b>
+        <div class="grid" th:if="${role == 'ADMIN'}">
+            <div>
+                <form th:action="@{/admin/add-quiz}" method="post">
+                    <input type="hidden" th:value="${userName}" th:name="userName">
+                    <input type="hidden" th:value="${token}" th:name="token">
+                    <button style="width: 50%; height: 100%; margin-bottom: 20px" type="submit" class="button">
+                        Create New Quiz
+                    </button>
+                </form>
             </div>
+            <div>
+                <form th:action="@{/admin/delQuiz}">
+                    <input type="hidden" th:value="${userName}" th:name="userName">
+                    <input type="hidden" th:value="${token}" th:name="token">
+                    <button style="width: 50%; height: 100%; margin-bottom: 20px" type="submit" class="button">
+                        Delete Quiz
+                    </button>
+                </form>
+            </div>
+        </div>
+        <h2>Quiz Attended</h2>
+        <div th:if="${quizList == null or quizList.size() == 0}">
+            <h3>No Quiz Attended</h3>
+            </br>
+            <b>!! Start Your Journey Now !!</b>
+        </div>
+        <div class="grid">
             <div th:each="quiz : ${quizList}" class="g-container">
                 <li>
                     <b th:text="${quiz.quizName}"></b>

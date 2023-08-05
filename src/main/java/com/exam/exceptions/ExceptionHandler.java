@@ -12,6 +12,6 @@ public class ExceptionHandler {
 
         String message = ex.getMessage();
         request.setAttribute("errorMessage", message);
-        return "/redirect:/error";
+        return "error";
     }
 }

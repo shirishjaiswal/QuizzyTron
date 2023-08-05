@@ -4,13 +4,14 @@ import com.exam.dto.LoginRequestDetails;
 import com.exam.module.User;
 import com.exam.repository.IRoleRepo;
 import com.exam.repository.IUserRepo;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public class UserService {
         Optional<User> isPresent = userRepo.findByUserName(user.getUserName());
         if (!isPresent.isPresent()) {
             user.setPassword(passwordEncoder(user.getPassword()));
-            if (user.getAdmin_Passcode().equals("546258")) {
+            if (user.getAdminPasscode().equals("OFFICIAL")) {
                 user.setRole("ADMIN");
             } else user.setRole("USER");
             userRepo.save(user);
@@ -112,35 +113,49 @@ public class UserService {
         return password;
     }
 
-    public boolean isValidRequest(String token, String userName) {
+    public void userRequestValidate(String token, String userName) {
+        Map<String, Boolean> validRequest = isValidRequest(token, userName);
+        try {
+            if(!Boolean.TRUE.equals(validRequest.get("USER"))) {
+                throw new Exception("User Not Found");
+            }
+        }
+        catch (Exception e) {
+            if(!Boolean.TRUE.equals(validRequest.get("ADMIN"))) {
+                try {
+                    throw new Exception("User Not Found");
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+    }
+
+    public void adminRequestValidate(String token, String userName) {
+        Map<String, Boolean> validRequest = isValidRequest(token, userName);
+        if(!Boolean.TRUE.equals(validRequest.get("ADMIN"))) {
+            try {
+                throw new Exception("User Not Found");
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
+    private Map<String, Boolean> isValidRequest(String token, String userName) {
         String tempToken = generateToken(userName);
+        Map<String, Boolean> map = new HashMap<>();
         if (tempToken.equals(token)) {
             User byToken = userRepo.findByToken(token);
             if (byToken != null) {
-                return true;
+                map.put(byToken.getRole(), true);
             }
         }
-        try {
-            throw new Exception("Bad Request");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+        return map;
     }
 
-    public String isValidRequest(String userName) {
-        String tempToken = generateToken(userName);
-        User byToken = userRepo.findByToken(tempToken);
-        if (byToken != null) {
-            return tempToken;
-        }
-        return null;
-//        try {
-//            throw new Exception("Bad Request");
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-
+    public String adminOrUser(String userName) {
+        return findUserByUserName(userName).getRole();
     }
 
     private String generateToken(String userName) {

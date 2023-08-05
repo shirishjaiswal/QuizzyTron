@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add Quiz</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="addQuiz">
+            <form action="/admin/add-quizQuestions" method="post">
+                <input type="hidden" th:value="${userName}" th:name="userName">
+                <input type="hidden" th:value="${token}" th:name="token">
+
+                <div id="questionContainer">
+                    <label for="quizName"><h1>Quiz Name</h1></label>
+                    <input type="text" class="input" id="quizName" name="quizName" value="Quiz Name" required>
+
+                    <!-- Default Question -->
+                    <div class="question" data-index="0">
+                        </br>
+                        <label for="question">Question</label>
+                        <input type="text" class="input" id="question" name="questions[0].question"
+                               value="Enter Your Question" required><br>
+                        <label>Options</label>
+                        <input type="text" class="input" id="optOne" name="questions[0].optOne" value="Option 1"
+                               required>
+
+                        <input type="text" class="input" id="optTwo" name="questions[0].optTwo" value="Option 2"
+                               required><br>
+
+                        <input type="text" class="input" id="optThree" name="questions[0].optThree" value="Option 3"
+                               required>
+
+                        <input type="text" class="input" id="optFour" name="questions[0].optFour" value="Option 4"
+                               required></br>
+                        <label>Select Correct Answer</label></br></br>
+                        <label><input type="radio" name="questions[0].answer" value="optOne" checked required> Option 1</label>
+                        <label><input type="radio" name="questions[0].answer" value="optTwo" required> Option 2</label>
+                        <label><input type="radio" name="questions[0].answer" value="optThree" required> Option
+                            3</label>
+                        <label><input type="radio" name="questions[0].answer" value="optFour" required> Option 4</label>
+                        </br></br>
+                    </div>
+                </div>
+                </br>
+
+                <button type="button" class="button" onclick="addQuestion()">Add Question</button>
+                <button type="submit" class="button">Upload</button>
+            </form>
+        </div>
+    </div>
+    <script>
+    function addQuestion() {
+        const questionContainer = document.getElementById('questionContainer');
+        const questionDivs = document.querySelectorAll('.question');
+        const newIndex = questionDivs.length;
+
+        const newQuestionDiv = document.createElement('div');
+        newQuestionDiv.classList.add('question');
+        newQuestionDiv.setAttribute('data-index', newIndex);
+
+        newQuestionDiv.innerHTML = `
+            <hr>
+            <label for="question">Question</label>
+            </br>
+            <input type="text" class="input" id="question" name="questions[${newIndex}].question" value="Default Question" required><br>
+            <label>Options</label>
+            <input type="text" class="input" id="optOne" name="questions[${newIndex}].optOne" value="Option 1" required><br>
+            <input type="text" class="input" id="optTwo" name="questions[${newIndex}].optTwo" value="Option 2" required><br>
+            <input type="text" class="input" id="optThree" name="questions[${newIndex}].optThree" value="Option 3" required><br>
+            <input type="text" class="input" id="optFour" name="questions[${newIndex}].optFour" value="Option 4" required><br><br>
+
+            <label>Select Correct Answer</label></br></br>
+            <label><input type="radio" name="questions[${newIndex}].answer" value="optOne" checked required> Option 1</label>
+            <label><input type="radio" name="questions[${newIndex}].answer" value="optTwo" required> Option 2</label>
+            <label><input type="radio" name="questions[${newIndex}].answer" value="optThree" required> Option 3</label>
+            <label><input type="radio" name="questions[${newIndex}].answer" value="optFour" required> Option 4</label>
+            </br></br>
+        `;
+
+        questionContainer.appendChild(newQuestionDiv);
+    }
+
+
+    </script>
+</section>
+</body>
+</html>

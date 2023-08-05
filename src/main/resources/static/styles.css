@@ -1,3 +1,7 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
 nav {
     position: fixed;
     top: 0;
@@ -93,7 +97,21 @@ button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
+.del-button {
+    font-size: 16px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #D22B2B;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.del-button:hover {
+    background-color: #D22B2B;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 h1 {
   color: #4caf50;
   margin-top: 20px;
@@ -147,24 +165,6 @@ ol li {
   margin-top: 20px;
 }
 
-.logo {
-  margin-bottom: 10px;
-}
-
-.signup-field {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  margin-bottom: 10px;
-}
-
-.signup-field label {
-  align-text : left;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #444;
-}
-
 .q-container {
     max-width: 600px;
     margin: 0 auto;
@@ -192,10 +192,6 @@ ol li {
     margin-bottom: 10px;
 }
 
-h1, h2, h3 {
-    margin: 0;
-    padding: 0;
-}
 .container {
     margin-top: 90px;
     max-width: 800px;
@@ -221,3 +217,68 @@ h1, h2, h3, label {
     margin: 0;
     padding: 0;
 }
+
+.quiz-container {
+    display: block;
+}
+
+.signup-field input[type="checkbox"] {
+    display: none;
+}
+
+.signup-field label {
+    cursor: pointer;
+}
+
+.signup-field input[type="checkbox"] + label:before {
+    content: "\2610";
+    margin-right: 5px;
+}
+
+.signup-field input[type="checkbox"]:checked + label:before {
+    content: "\2611";
+}
+
+/* Admin passcode field */
+.admin-passcode-container {
+    display: none;
+}
+
+.signup-field input[type="checkbox"]:checked ~ .admin-passcode-container {
+    display: block;
+}
+.addQuiz form {
+    flex-direction: column;
+    align-items: center;
+}
+
+.addQuiz label {
+    flex-direction: row;
+    font-weight: bold;
+    color: #238773;
+}
+
+.addQuiz .input {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.question hr {
+    margin: 10px 0;
+    border: solid   2px;
+    border-top: 1px solid #ccc;
+}
+
+.addQuiz input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
+

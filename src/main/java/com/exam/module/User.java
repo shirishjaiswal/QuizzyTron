@@ -24,6 +24,6 @@ public class User {
     private String password;
     private String role;
     @Column(nullable = true)
-    private String admin_Passcode = "NA";
+    private String adminPasscode = "NA";
     private String token;
 }
