@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ public class UserController {
         return "main";
     }
 
-    @PostMapping("/quizz")
+    @PostMapping("/quiz")
     public String getQuizzes(@ModelAttribute UserNameToken userNameToken, HttpServletRequest request) {
         userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
         List<String> quizzes = questionService.getQuizList();
@@ -108,6 +109,21 @@ public class UserController {
         request.setAttribute("userName", userNameToken.getUserName());
 
         return "userData";
+    }
+
+    @PostMapping("/logout")
+    public RedirectView logout(@ModelAttribute UserNameToken userNameToken) {
+        userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
+        int logout = userService.logout(userNameToken.getToken(), userNameToken.getUserName());
+        if(logout == 0) {
+            try {
+                throw new Exception("Not Signed In");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        RedirectView redirectView = new RedirectView("/");
+        return redirectView;
     }
 
     @GetMapping("/about")

@@ -14,10 +14,11 @@
     </form>
     <a th:if="${userName == null}" href="/" class="button">Home</a>
     <a th:if="${userName == null and token == null}" href="about" class="button">About</a>
-    <div class="dropdown">
-        <a th:href="${userName != null and token != null} ? @{/user/profile(userName=${userName}, token=${token})} : '/'" class="button" th:text="${userName} ?: 'User'">User</a>
+    <div class="dropdown" th:if="${userName != null and token != null}">
+        <block style="width=150px" th:text="${userName}" class="button"></block>
         <div class="dropdown-menu">
-            <form th:if="${userName != null and token != null}" th:action="@{/logout(userName=${userName}, token=${token})}" th:method="${userName != null and token != null} ? 'POST' : 'GET'">
+            <a th:href="${userName != null and token != null} ? @{/user/profile(userName=${userName}, token=${token})} : '/'" class="button" >Profile</a>
+            <form th:if="${userName != null and token != null}" th:action="@{/user/logout(userName=${userName}, token=${token})}" th:method="${userName != null and token != null} ? 'POST' : 'GET'">
                 <button type="submit" class="button">Log Out</button>
             </form>
         </div>

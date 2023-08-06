@@ -6,27 +6,24 @@
 ## **Status** :- ***On-Going***
 
 ## Features
+#### For USER and ADMIN
+- Create Account
+- Sign In using userName and Password
+- Attend any quiz
+- View past attended quiz and there performance</li>
+- Logout
+#### Additional for ADMIN
+- For creating account admin passcode is required</li>
+- Add Quiz
+- Delete Quiz
+#### Over All
 - User registration and account creation
 - Quiz attendance and performance tracking
 - Quiz history and score tracking
 - User-friendly interface
 
-## **Application Properties**
-```
-Server.port = 8082
-spring.datasource.driver-class-name = com.mysql.cj.jdbc.Driver
-spring.datasource.url = jdbc:mysql://localhost:3306/examportal?createDatabaseIfNotExist=true
-spring.datasource.username = userName
-spring.datasource.password = password
-spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL8Dialect
-spring.jpa.hibernate.ddl-auto = update
-spring.jpa.show-sql = true
-spring.jpa.properties.hibernate.format_sql = true
-spring.main.allow-circular-references=true
-```
-
 ### Accessing the Project
-Home URL : ```http://localhost:8082/```
+Home URL : ```http://localhost:8080/```
 
 ## Requirements
 1. IDE (Intellij Idea / Eclipse)
@@ -42,10 +39,10 @@ To run QuizzyTron on your local machine, follow these steps:
 4. Run the application: `mvn spring-boot:run`
 
 ## Usage
-Open your web browser and go to `http://localhost:8082` to access QuizzyTron.
+Open your web browser and go to `http://localhost:8080` to access QuizzyTron.
 
 ### Screenshots
-Home URL : ```http://localhost:8082/```
+Home URL : ```http://localhost:8080/```
 ![image](https://github.com/shirishjaiswal/QuizzyTron/assets/98471211/07547c65-7731-42b4-82e7-712c632f990c)
 
 Endpoints remained to integrate with FrontEnd

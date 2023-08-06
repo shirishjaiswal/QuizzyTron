@@ -41,21 +41,6 @@ public class HomeController {
         return "main";
     }
 
-    @PostMapping("/logout")
-    public RedirectView logout(@ModelAttribute UserNameToken userNameToken) {
-        userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
-        int logout = userService.logout(userNameToken.getToken(), userNameToken.getUserName());
-        if(logout == 0) {
-            try {
-                throw new Exception("Not Signed In");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-        RedirectView redirectView = new RedirectView("/");
-        return redirectView;
-    }
-
     @GetMapping("/signup")
     public String signup() {
         return "signup";
@@ -66,25 +51,14 @@ public class HomeController {
 
         UserEntity saved = userService.createUser(userEntity);
 
-        String noteThree = "If you have any questions or need assistance, please don't hesitate to contact our support team.";
-        String noteFour = "Thank you";
-
-        request.setAttribute("noteThree", noteThree);
-        request.setAttribute("noteFour", noteFour);
-
         if (saved == null) {
-            String noteOne = "Registration Unsuccessfull Please try again!!";
-            String noteTwo = "If already have an account Please log in using your email address and password to access all the features of our website.";
+            String noteOne = "Registration Unsuccessful Please try again!!";
             request.setAttribute("textColor", "red");
             request.setAttribute("noteOne", noteOne);
-            request.setAttribute("noteTwo", noteTwo);
         } else {
             String noteOne = "Congratulations! Your account has been successfully registered.";
-            String noteTwo = "If already have an account Please log in using your email address and password to access all the features of our website.";
-
             request.setAttribute("imageURL", "/checked.png");
             request.setAttribute("noteOne", noteOne);
-            request.setAttribute("noteTwo", noteTwo);
         }
         return "signUpStatus";
     }

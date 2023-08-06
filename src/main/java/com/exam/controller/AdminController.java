@@ -24,13 +24,12 @@ public class AdminController {
     private UserService userService;
 
     @PostMapping("/add-quiz")
-    public String addQuiz (@RequestParam("userName") String userName,
-                           @RequestParam("token") String token,
+    public String addQuiz (@ModelAttribute UserNameToken userNameToken,
                            HttpServletRequest request) {
 
-        userService.adminRequestValidate(token, userName);
-        request.setAttribute("userName", userName);
-        request.setAttribute("token", token);
+        userService.adminRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
+        request.setAttribute("userName", userNameToken.getUserName());
+        request.setAttribute("token", userNameToken.getToken());
         return "addQuestion";
     }
 
@@ -74,15 +73,14 @@ public class AdminController {
 
     @PostMapping("/delQuiz/{quizName}")
     public String getQuiz (@PathVariable("quizName") String quizName,
-                           @RequestParam("token") String token,
-                           @RequestParam("userName") String userName,
+                           @ModelAttribute UserNameToken userNameToken,
                            RedirectAttributes redirectAttributes){
 
-        userService.userRequestValidate(token, userName);
+        userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
         questionService.deleteQuiz(quizName);
         List<Questions> questionsList = questionService.getQuiz(quizName);
-        redirectAttributes.addAttribute("token", token);
-        redirectAttributes.addAttribute("userName", userName);
+        redirectAttributes.addAttribute("token", userNameToken.getToken());
+        redirectAttributes.addAttribute("userName", userNameToken.getUserName());
         return "redirect:/admin/delQuiz";
     }
 }

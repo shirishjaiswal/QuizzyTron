@@ -19,7 +19,6 @@
                     <li>
                         <b style="text-size:24" th:text="${question.question}"></b>
                         <div class="answer-container">
-                            </br>
                             <label>
                                 <input type="radio" th:name="${question.id}" th:value="${question.optOne}" required/>
                                 <span th:text="${question.optOne}"></span>
@@ -37,6 +36,7 @@
                                 <span th:text="${question.optFour}"></span>
                             </label><br/>
                         </div>
+                        </br>
                     </li>
                 </div>
             </ol>
