@@ -5,6 +5,9 @@
 ## **Database** :- SQL
 ## **Status** :- ***On-Going***
 
+### Accessing the Project
+URL : ```https://quizzytron.onrender.com/```
+
 ## Features
 #### For USER and ADMIN
 - Create Account
@@ -21,9 +24,6 @@
 - Quiz attendance and performance tracking
 - Quiz history and score tracking
 - User-friendly interface
-
-### Accessing the Project
-Home URL : ```http://localhost:8080/```
 
 ## Requirements
 1. IDE (Intellij Idea / Eclipse)
