@@ -1,63 +1,99 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base::layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>profile</title>
-</head>
-<style>
-</style>
-<body>
-<section>
-    <input type="hidden" id="userName" th:value="${userName}" th:name="userName">
-    <input type="hidden" id="token" th:value="${token}" th:name="token">
-    <div class="container">
-        <img th:src="@{/profile.png}" alt="loggedIn Logo" height="100px" class="profile"/>
-        <h1 th:text="${#strings.toUpperCase(userName)}"></h1></br>
+  </head>
+  <style></style>
+  <body>
+    <section>
+      <input
+        type="hidden"
+        id="userName"
+        th:value="${userName}"
+        th:name="userName"
+      />
+      <input type="hidden" id="token" th:value="${token}" th:name="token" />
+      <div class="container">
+        <img
+          th:src="@{/profile.png}"
+          alt="Profile Logo"
+          height="100px"
+          class="profile"
+        />
+        <h1 th:text="${#strings.toUpperCase(userName)}"></h1>
+        <br />
         <div class="grid" th:if="${role == 'ADMIN'}">
-            <div>
-                <form th:action="@{/admin/add-quiz}" method="post">
-                    <input type="hidden" th:value="${userName}" th:name="userName">
-                    <input type="hidden" th:value="${token}" th:name="token">
-                    <button style="width: 50%; height: 100%; margin-bottom: 20px" type="submit" class="button">
-                        Create New Quiz
-                    </button>
-                </form>
-            </div>
-            <div>
-                <form th:action="@{/admin/delQuiz}">
-                    <input type="hidden" th:value="${userName}" th:name="userName">
-                    <input type="hidden" th:value="${token}" th:name="token">
-                    <button style="width: 50%; height: 100%; margin-bottom: 20px" type="submit" class="button">
-                        Delete Quiz
-                    </button>
-                </form>
-            </div>
+          <div id="Create Quiz">
+            <form th:action="@{/admin/add-quiz}" method="post">
+              <input type="hidden" th:value="${userName}" th:name="userName" />
+              <input type="hidden" th:value="${token}" th:name="token" />
+              <button
+                style="width: 50%; height: 100%; margin-bottom: 20px"
+                type="submit"
+                class="button"
+              >
+                Create New Quiz
+              </button>
+            </form>
+          </div>
+          <div id="Delete Quiz">
+            <form th:action="@{/admin/delQuiz}" method="post">
+              <input type="hidden" th:value="${userName}" th:name="userName" />
+              <input type="hidden" th:value="${token}" th:name="token" />
+              <button
+                style="width: 50%; height: 100%; margin-bottom: 20px"
+                type="submit"
+                class="button"
+              >
+                Delete Quiz
+              </button>
+            </form>
+          </div>
+          <div id="Quiz Details">
+            <form th:action="@{/admin/getQuizDetails}" method="post">
+              <input type="hidden" th:value="${userName}" th:name="userName" />
+              <input type="hidden" th:value="${token}" th:name="token" />
+              <button
+                style="width: 50%; height: 100%; margin-bottom: 20px"
+                type="submit"
+                class="button"
+              >
+                Quiz Details
+              </button>
+            </form>
+          </div>
         </div>
         <h2>Quiz Attended</h2>
         <div th:if="${quizList == null or quizList.size() == 0}">
-            <h3>No Quiz Attended</h3>
-            </br>
-            <b>!! Start Your Journey Now !!</b>
+          <h3>No Quiz Attended</h3>
+          <br />
+          <b>!! Start Your Journey Now !!</b>
         </div>
         <div class="grid">
-            <div th:each="quiz : ${quizList}" class="g-container">
-                <li>
-                    <b th:text="${quiz.quizName}"></b>
-                    <div class="details-container">
-                        <label>
-                            Quiz Attended on :
-                            <span th:text="${quiz.date}"></span>
-                        </label></br>
-                        <label>
-                            Marks Obtained :
-                            <span th:text="${quiz.marks}"></span>
-                        </label>
-                    </div>
-                </li>
-            </div>
+          <div th:each="quiz : ${quizList}" class="g-container"
+               th:classappend="${quiz.obtainedMarks &lt; quiz.totalMarks/2} ? 'fail' : 'pass'">
+            <li>
+              <b th:text="${quiz.quizName}"></b>
+              <div class="details-container">
+                <label>
+                  Quiz Attended on :
+                  <span th:text="${quiz.date}"></span> </label
+                ><br />
+                <label>
+                  Marks Obtained :
+                  <span th:text="${quiz.obtainedMarks}"></span>
+                </label>
+              </div>
+            </li>
+          </div>
         </div>
-    </div>
-</section>
-</body>
+      </div>
+    </section>
+  </body>
 </html>

@@ -38,7 +38,7 @@ public class HomeController {
 
         request.setAttribute("userName", loginRequestDetails.getUserName());
         request.setAttribute("token", token);
-        return "main";
+        return "home";
     }
 
     @GetMapping("/signup")

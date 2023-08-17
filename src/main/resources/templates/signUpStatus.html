@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base::layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>signup status</title>
-</head>
-<body>
-<section>
-    <div class="container">
-        <img th:src="${imageURL}" alt="img" height="100px" class="img logo"/></br></br>
-        <h1 th:style="'color: ' + ${textColor}" id="noteOne" th:text="${noteOne}"></h1></br></br>
-        <h3>If already have an account Please log in using your userName and password to access all the features of our website.</h3></br></br>
-        <h3> If you have any questions or need assistance, please don't hesitate to contact our support team.</h3></br>
-        <h3> Thank you</h3></br>
-        <div style="text-align: center;">
-            <button onclick="location.href='login'" class="button">Sign In</button>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <img
+          th:src="${imageURL}"
+          alt="img"
+          height="100px"
+          class="img logo"
+        /><br /><br />
+        <h1
+          th:style="'color: ' + ${textColor}"
+          id="noteOne"
+          th:text="${noteOne}"
+        ></h1>
+        <br /><br />
+        <h3>
+          If already have an account Please log in using your userName and
+          password to access all the features of our website.
+        </h3>
+        <br /><br />
+        <h3>
+          If you have any questions or need assistance, please don't hesitate to
+          contact our support team.
+        </h3>
+        <br />
+        <h3>Thank you</h3>
+        <br />
+        <div style="text-align: center">
+          <button onclick="location.href='login'" class="button">
+            Sign In
+          </button>
         </div>
-    </div>
-    <footer>
-        <p style="text-align: center;"> &copy; 2023 QuizzyTron. All rights reserved.</p>
-    </footer>
-</section>
-</body>
-
+      </div>
+      <footer>
+        <p style="text-align: center">
+          &copy; 2023 QuizzyTron. All rights reserved.
+        </p>
+      </footer>
+    </section>
+  </body>
 </html>

@@ -2,8 +2,10 @@ package com.exam.controller;
 
 import com.exam.dto.UserNameToken;
 import com.exam.module.Questions;
+import com.exam.module.Quiz;
 import com.exam.module.UserEntity;
 import com.exam.service.QuestionService;
+import com.exam.service.QuizService;
 import com.exam.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private QuizService quizService;
+
     @PostMapping("/add-quiz")
     public String addQuiz (@ModelAttribute UserNameToken userNameToken,
                            HttpServletRequest request) {
@@ -30,7 +35,7 @@ public class AdminController {
         userService.adminRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
         request.setAttribute("userName", userNameToken.getUserName());
         request.setAttribute("token", userNameToken.getToken());
-        return "addQuestion";
+        return "createQuiz";
     }
 
     @PostMapping("/add-quizQuestions")
@@ -51,24 +56,23 @@ public class AdminController {
         return "queSaved";
     }
 
-    @GetMapping("/getQuizs")
-    public List<String> getQuizs() {
-        return questionService.getQuizList();
-    }
-
     @GetMapping("/{userName}")
     public UserEntity getUser(@PathVariable("userName") String userName) {
         return userService.findUserByUserName(userName);
     }
 
-    @GetMapping("/delQuiz")
+    @PostMapping("/delQuiz")
     public String quizList(@ModelAttribute UserNameToken userNameToken, HttpServletRequest request) {
         userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
         List<String> quizzes = questionService.getQuizList();
         request.setAttribute("userName", userNameToken.getUserName());
         request.setAttribute("token", userNameToken.getToken());
+        request.setAttribute("imageURL", "/delete.png");
+        request.setAttribute("pageTitle", "Delete Quiz");
         request.setAttribute("quizzes", quizzes);
-        return "delQuiz";
+        request.setAttribute("textColor", "red");
+        request.setAttribute("operation", "Click on Quiz to Delete");
+        return "quizzes";
     }
 
     @PostMapping("/delQuiz/{quizName}")
@@ -83,4 +87,31 @@ public class AdminController {
         redirectAttributes.addAttribute("userName", userNameToken.getUserName());
         return "redirect:/admin/delQuiz";
     }
+
+    @PostMapping("/getQuizDetails")
+    public String getQuizzes(@ModelAttribute UserNameToken userNameToken, HttpServletRequest request) {
+        userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
+        List<String> quizzes = questionService.getQuizList();
+        request.setAttribute("userName", userNameToken.getUserName());
+        request.setAttribute("token", userNameToken.getToken());
+        request.setAttribute("imageURL", "/details.png");
+        request.setAttribute("pageTitle", "Quiz Details");
+        request.setAttribute("quizzes", quizzes);
+        request.setAttribute("operation", "Click on Quiz to See Details");
+        return "quizzes";
+    }
+
+    @PostMapping("/getQuizDetails/{quizName}")
+    public String getQuizDetails(@PathVariable("quizName") String quizName,
+                                 @ModelAttribute UserNameToken userNameToken,
+                                 HttpServletRequest request) {
+        userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
+        List<Quiz> quizList = quizService.findByQuizName(quizName);
+        request.setAttribute("userName", userNameToken.getUserName());
+        request.setAttribute("token", userNameToken.getToken());
+        request.setAttribute("totalMarks", quizList.get(0).getTotalMarks());
+        request.setAttribute("quizList", quizList);
+        return "quizDetails";
+    }
+
 }

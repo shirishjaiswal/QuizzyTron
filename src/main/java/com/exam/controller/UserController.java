@@ -39,21 +39,20 @@ public class UserController {
         userService.userRequestValidate(token, userName);
         request.setAttribute("token", token);
         request.setAttribute("userName", userName);
-        return "main";
+        return "home";
     }
 
     @PostMapping("/quiz")
     public String getQuizzes(@ModelAttribute UserNameToken userNameToken, HttpServletRequest request) {
         userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
         List<String> quizzes = questionService.getQuizList();
-        ModelAndView modelAndView = new ModelAndView("/selectQuiz.html");
-        modelAndView.addObject("userName", userNameToken.getUserName());
-        modelAndView.addObject("token", userNameToken.getToken());
-        modelAndView.addObject("quizzes", quizzes);
         request.setAttribute("userName", userNameToken.getUserName());
         request.setAttribute("token", userNameToken.getToken());
+        request.setAttribute("imageURL", "/choice.png");
+        request.setAttribute("pageTitle", "Select Quiz");
         request.setAttribute("quizzes", quizzes);
-        return "selectQuiz";
+        request.setAttribute("operation", "Click on Quiz to Begin");
+        return "quizzes";
     }
 
     @PostMapping("/getQuestions/{quizName}")
@@ -66,7 +65,7 @@ public class UserController {
         request.setAttribute("token", userNameToken.getToken());
         request.setAttribute("quizName", questionsList.get(0).getQuizName());
         request.setAttribute("questionsList", questionsList);
-        return "quizPage";
+        return "solveQuiz";
     }
 
     @PostMapping("/verify")
@@ -74,7 +73,7 @@ public class UserController {
         userService.userRequestValidate(answer.get("token"), answer.get("userName"));
         int marks = questionService.verifyAnswer(answer);
         int noOfQuestion = questionService.noOfQuestion(answer.get("quizName"));
-        quizService.userAttendedQuiz(userService.findUserByUserName(answer.get("userName")), answer.get("quizName"), marks);
+        quizService.userAttendedQuiz(userService.findUserByUserName(answer.get("userName")), answer.get("quizName"), marks, noOfQuestion);
         String greeting = "";
         String note = "";
         if(noOfQuestion/2 >= marks) {
@@ -97,7 +96,7 @@ public class UserController {
         return "marks";
     }
 
-    @GetMapping("/profile")
+    @PostMapping("/profile")
     public String profile (@ModelAttribute UserNameToken userNameToken, HttpServletRequest request) {
         userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
         if(userService.adminOrUser(userNameToken.getUserName()).equals("ADMIN")) {

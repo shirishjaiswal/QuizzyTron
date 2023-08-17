@@ -1,56 +1,55 @@
 body {
-    font-family: sans-serif;
-    background-color: #f0f0f0;
+  font-family: sans-serif;
+  background-color: #f0f0f0;
 }
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #238773;
-    text-align: center;
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #238773;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
 nav .dropdown {
-   position: relative;
-   width: 100px;
-   font-size: 16px;
-   padding: 10px 20px;
-   transition: background-color 0.3s ease;
+  position: relative;
+  width: 100px;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
 }
 
-/* Set the width of the buttons inside the dropdown */
 .dropdown .button {
   width: 100%;
 }
 
 nav .dropdown-menu {
-    display: none;
-    position: absolute;
-    width: 100%;
-    top: 100%;
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 100%;
 }
 
 nav .dropdown:hover .dropdown-menu {
-    display: block;
+  display: block;
 }
 
 nav .dropdown-menu a {
-    color: #fff;
-    width: 100%;
-    text-decoration: none;
-    display: block;
-    padding: 10px 10px;
+  color: #fff;
+  width: 100%;
+  text-decoration: none;
+  display: block;
+  padding: 10px 10px;
 }
 
 nav .button {
   all: unset;
   font-family: Arial, sans-serif;
   font-size: 16px;
-  padding: 10px ;
+  padding: 10px;
   border-radius: 3px;
   color: #fff;
   width: 98px;
@@ -60,13 +59,13 @@ nav .button {
 }
 
 nav .button:hover {
-    background-color: #26957F;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  background-color: #26957f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 nav a:hover {
-  background-color: #26957F;
+  background-color: #26957f;
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -87,7 +86,7 @@ p {
 button {
   font-size: 16px;
   background-color: rgb(255, 255, 255);
-  border: 2px solid #50D2B8;
+  border: 2px solid #50d2b8;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
@@ -95,24 +94,24 @@ button {
 }
 
 button:hover {
-  background-color: #50D2B8;
+  background-color: #50d2b8;
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 .del-button {
-    font-size: 16px;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid #D22B2B;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  font-size: 16px;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid #d22b2b;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 .del-button:hover {
-    background-color: #D22B2B;
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  background-color: #d22b2b;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 h1 {
   color: #4caf50;
@@ -122,13 +121,13 @@ h1 {
 }
 
 h2 {
-    text-align: center;
-    color: rgb(21, 70, 74);
-    margin-bottom: 10px;
+  text-align: center;
+  color: rgb(21, 70, 74);
+  margin-bottom: 10px;
 }
 
 h3 {
-  color: #238773;;
+  color: #238773;
   margin-bottom: 10px;
 }
 
@@ -137,11 +136,12 @@ ol {
 }
 
 li {
-  color: #00000;
+  color: #000000;
   margin-bottom: 10px;
 }
+
 li label {
-    margin-left: 20px
+  margin-left: 20px;
 }
 .container {
   text-align: center;
@@ -170,114 +170,129 @@ li label {
 }
 
 .q-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .profile {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .g-container {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .quiz-container li {
-    list-style: none;
-    margin-bottom: 10px;
+  list-style: none;
+  margin-bottom: 10px;
 }
 
 .container {
-    margin-top: 90px;
-    max-width: 800px;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
+  margin-top: 90px;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
 }
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
 }
 
 .shadow-box {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .details-container {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
-h1, h2, h3, label {
-    margin: 0;
-    padding: 0;
+h1,
+h2,
+h3,
+label {
+  margin: 0;
+  padding: 0;
 }
 
 .quiz-container {
-    display: block;
+  display: block;
 }
 
 .signup-field input[type="checkbox"] {
-    display: none;
+  display: none;
 }
 
 .signup-field label {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .signup-field input[type="checkbox"] + label:before {
-    content: "\2610";
-    margin-right: 5px;
+  content: "\2610";
+  margin-right: 5px;
 }
 
 .signup-field input[type="checkbox"]:checked + label:before {
-    content: "\2611";
+  content: "\2611";
 }
 
 .admin-passcode-container {
-    display: none;
+  display: none;
 }
 
 .signup-field input[type="checkbox"]:checked ~ .admin-passcode-container {
-    display: block;
+  display: block;
 }
 .addQuiz form {
-    flex-direction: column;
-    align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .addQuiz label {
-    flex-direction: row;
-    font-weight: bold;
-    color: #238773;
+  flex-direction: row;
+  font-weight: bold;
+  color: #238773;
 }
 
 .addQuiz .input {
-    width: 80%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  width: 80%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 .question hr {
-    margin: 10px 0;
-    border: solid   2px;
-    border-top: 1px solid #ccc;
+  margin: 10px 0;
+  border: solid 2px;
+  border-top: 1px solid #ccc;
 }
 
 .addQuiz input[type="text"] {
-    width: 100%;
-    padding: 5px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.fail {
+  background-color: #ffecec;
+  border-style: solid;
+  border-color: red;
+}
+
+.pass {
+  background-color: #ecfff9;
+  border-style: solid;
+  border-color: green;
 }

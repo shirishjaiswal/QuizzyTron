@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base::layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>error</title>
-</head>
-<body>
-<section>
-    <div class="container">
-        <img th:src="@{/cancel.png}" alt="img" height="100px" class="img logo"/>
-        <h1 style="color : red">Error Occurred</h1></br>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <img
+          th:src="@{/cancel.png}"
+          alt="img"
+          height="100px"
+          class="img logo"
+        />
+        <h1 style="color: red">Error Occurred</h1>
+        <br />
         <h3 th:text="${errorMessage}"></h3>
-    </div>
-</section>
-</body>
+      </div>
+    </section>
+  </body>
 </html>

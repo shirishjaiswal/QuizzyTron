@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface IQuizRepo extends JpaRepository<Quiz, Integer> {
     List<Quiz> findAllByUserEntityId(long id);
+
+    List<Quiz> findByQuizName(String quizName);
 }

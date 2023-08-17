@@ -16,7 +16,8 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String quizName;
-    private int marks;
+    private int obtainedMarks;
+    private int totalMarks;
     private final LocalDate date = LocalDate.now();
 
     @ManyToOne

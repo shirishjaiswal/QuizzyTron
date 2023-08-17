@@ -1,36 +1,91 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title}, ~{::section})}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base::layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signup Page</title>
-</head>
-<body>
-<section>
-    <form action="/signup" method="POST" class="form">
+  </head>
+  <body>
+    <section>
+      <form action="/signup" method="POST" class="form">
         <div class="container">
-            <img th:src="@{/signup.png}" alt="Signup Logo" height="100px" class="logo"/>
-            <h1>Join Us Today!</h1></br>
-            <input id="firstName" name="firstName" required placeholder="First Name" class="input"/>
-            <input id="lastName" name="lastName" required placeholder="Last Name" class="input"/>
-            <input id="mobileNumber" name="mobileNumber" required type="tel" placeholder="Mobile Number"
-                   class="input"/>
-            <input id="email" name="email" required type="email" placeholder="Email" class="input"/>
-            <input id="userName" name="userName" required placeholder="UserName" class="input"/>
-            <input id="password" name="password" required type="password" placeholder="Password" class="input"/>
-            <div class="signup-field">
-                <input type="checkbox" id="showAdminPasscode" />
-                <label for="showAdminPasscode">Admin Passcode</label>
-                <div class="admin-passcode-container">
-                    <input id="adminPasscode" name="adminPasscode" placeholder="adminPasscode" class="input" />
-                </div>
+          <img
+            th:src="@{/signup.png}"
+            alt="Signup Logo"
+            height="100px"
+            class="logo"
+          />
+          <h1>Join Us Today!</h1>
+          <br />
+          <input
+            id="firstName"
+            name="firstName"
+            required
+            placeholder="First Name"
+            class="input"
+          />
+          <input
+            id="lastName"
+            name="lastName"
+            required
+            placeholder="Last Name"
+            class="input"
+          />
+          <input
+            id="mobileNumber"
+            name="mobileNumber"
+            required
+            type="tel"
+            placeholder="Mobile Number"
+            class="input"
+          />
+          <input
+            id="email"
+            name="email"
+            required
+            type="email"
+            placeholder="Email"
+            class="input"
+          />
+          <input
+            id="userName"
+            name="userName"
+            required
+            placeholder="UserName"
+            class="input"
+          />
+          <input
+            id="password"
+            name="password"
+            required
+            type="password"
+            placeholder="Password"
+            class="input"
+          />
+          <div class="signup-field">
+            <input type="checkbox" id="showAdminPasscode" />
+            <label for="showAdminPasscode">Admin Passcode</label>
+            <div class="admin-passcode-container">
+              <input
+                id="adminPasscode"
+                name="adminPasscode"
+                placeholder="adminPasscode"
+                class="input"
+              />
             </div>
-            <div class="button-row">
-                <button type="submit" class="button" id="submitButton">Sign Up</button>
-                <button type="reset" class="button">Clear</button>
-            </div>
+          </div>
+          <div class="button-row">
+            <button type="submit" class="button" id="submitButton">
+              Sign Up
+            </button>
+            <button type="reset" class="button">Clear</button>
+          </div>
         </div>
-    </form>
-</section>
-</body>
+      </form>
+    </section>
+  </body>
 </html>
