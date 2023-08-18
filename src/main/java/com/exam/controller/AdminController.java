@@ -78,14 +78,19 @@ public class AdminController {
     @PostMapping("/delQuiz/{quizName}")
     public String getQuiz (@PathVariable("quizName") String quizName,
                            @ModelAttribute UserNameToken userNameToken,
-                           RedirectAttributes redirectAttributes){
-
+                           HttpServletRequest request){
+//        RedirectAttributes redirectAttributes
         userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
         questionService.deleteQuiz(quizName);
-        List<Questions> questionsList = questionService.getQuiz(quizName);
-        redirectAttributes.addAttribute("token", userNameToken.getToken());
-        redirectAttributes.addAttribute("userName", userNameToken.getUserName());
-        return "redirect:/admin/delQuiz";
+        List<String> quizzes = questionService.getQuizList();
+        request.setAttribute("userName", userNameToken.getUserName());
+        request.setAttribute("token", userNameToken.getToken());
+        request.setAttribute("imageURL", "/delete.png");
+        request.setAttribute("pageTitle", "Delete Quiz");
+        request.setAttribute("quizzes", quizzes);
+        request.setAttribute("textColor", "red");
+        request.setAttribute("operation", "Click on Quiz to Delete");
+        return "quizzes";
     }
 
     @PostMapping("/getQuizDetails")

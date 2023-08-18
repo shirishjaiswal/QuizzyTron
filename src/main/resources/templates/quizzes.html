@@ -41,6 +41,7 @@
           <div th:each="quiz : ${quizzes}" class="g-container">
             <br />
             <div class="details-container">
+<!--              Delete Quiz-->
               <form th:if="${pageTitle == 'Delete Quiz'}"
                     th:action="@{'/admin/delQuiz/' + ${quiz}}"
                     method="post">
@@ -51,6 +52,7 @@
                   <th:block th:utext="${quiz}"></th:block>
                 </button>
               </form>
+<!--              select quiz-->
               <form th:if="${pageTitle == 'Select Quiz'}"
                     th:action="@{'/user/getQuestions/' + ${quiz}}"
                     method="post">
@@ -61,6 +63,7 @@
                   <th:block th:utext="${quiz}"></th:block>
                 </button>
               </form>
+<!--              Quiz Details-->
               <form th:if="${pageTitle == 'Quiz Details'}"
                     th:action="@{'/admin/getQuizDetails/' + ${quiz}}"
                     method="post">
