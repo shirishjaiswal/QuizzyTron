@@ -79,7 +79,6 @@ public class AdminController {
     public String getQuiz (@PathVariable("quizName") String quizName,
                            @ModelAttribute UserNameToken userNameToken,
                            HttpServletRequest request){
-//        RedirectAttributes redirectAttributes
         userService.userRequestValidate(userNameToken.getToken(), userNameToken.getUserName());
         questionService.deleteQuiz(quizName);
         List<String> quizzes = questionService.getQuizList();
@@ -114,7 +113,7 @@ public class AdminController {
         List<Quiz> quizList = quizService.findByQuizName(quizName);
         request.setAttribute("userName", userNameToken.getUserName());
         request.setAttribute("token", userNameToken.getToken());
-        request.setAttribute("totalMarks", quizList.get(0).getTotalMarks());
+        request.setAttribute("totalMarks", questionService.noOfQuestion(quizName));
         request.setAttribute("quizList", quizList);
         return "quizDetails";
     }
