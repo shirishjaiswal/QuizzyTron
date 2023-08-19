@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{base::layout(~{::title}, ~{::section})}"
+>
+<head>
+    <meta charset="UTF-8" />
+    <title>keep site alive</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="g-container">
+            <h1>Keeping Site alive using this Page</h1>
+            <p>This page has been refreshed <span id="refreshCount" th:text="${refreshCount}">0</span> times.</p>
+        </div>
+    </div>
+
+    <script>
+        // Get the current refresh count from Thymeleaf variable
+        var refreshCount = parseInt([[${refreshCount}]]);
+
+        // Update the refresh count
+        refreshCount++;
+        document.getElementById('refreshCount').textContent = refreshCount;
+
+        // Auto-refresh the page after 10 seconds
+        setTimeout(function() {
+            location.reload();
+        }, 600,000); // 1000 milliseconds = 1 seconds
+    </script>
+</section>
+</body>
+</html>

@@ -7,11 +7,11 @@ import com.exam.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class HomeController {
@@ -66,6 +66,15 @@ public class HomeController {
     @GetMapping("/about")
     public String about() {
         return "about";
+    }
+
+    private int refreshCount = 0;
+
+    @GetMapping("/refresh-page")
+    public String refreshPage(Model model) {
+        refreshCount++; // Increment the refresh count
+        model.addAttribute("refreshCount", refreshCount);
+        return "autoRefresh"; // Returns the Thymeleaf template name
     }
 }
 
