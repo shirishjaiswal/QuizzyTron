@@ -68,10 +68,11 @@ public class HomeController {
         return "about";
     }
 
-    private int refreshCount = 0;
+    private long refreshCount = 0;
 
     @GetMapping("/refresh-page")
     public String refreshPage(Model model) {
+        if(refreshCount == Long.MAX_VALUE) refreshCount = 0;
         refreshCount++; // Increment the refresh count
         model.addAttribute("refreshCount", refreshCount);
         return "autoRefresh"; // Returns the Thymeleaf template name
